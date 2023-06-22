@@ -1,0 +1,35 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "npx prettier --ignore-path .eslintignore --write \"**/*.{ts,tsx}\""
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@react-aria/ssr": "^3.6.0",
+    "framer-motion": "^10.12.10",
+    "jotai": "^2.2.1",
+    "next": "12",
+    "next-auth": "^4.22.1",
+    "next-connect": "0",
+    "node-tesseract-ocr": "^2.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "twitter-api-v2": "^1.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.0.1",
+    "@types/react": "18.0.14",
+    "@types/react-dom": "18.0.5",
+    "@types/react-sticky": "^6.0.4",
+    "eslint": "8.19.0",
+    "eslint-config-next": "12.2.0",
+    "prettier": "^2.8.8",
+    "typescript": "4.7.4"
+  }
+}

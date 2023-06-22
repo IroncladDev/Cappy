@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --font-size-small: 12px;
+  --font-size-default: 14px;
+  --font-size-subhead-default: 20px;
+  --font-size-subhead-big: 24px;
+  --font-size-header-default: 48px;
+  --font-size-header-big: 56px;
+
+  --line-height-small: 1.5;
+  --line-height-default: 1.6;
+  --line-height-subhead-default: 1.375;
+  --line-height-subhead-big: 1.2;
+  --line-height-header-default: 1;
+  --line-height-header-big: 1;
+
+  --dark-0: #000;
+  --dark-1: #27292a;
+  --dark-2: #434547;
+  --dark-3: #6e7072;
+  --dark-4: #a0a4a6;
+  
+  --light-0: #fff;
+  --light-1: #ebebf0;
+  --light-2: #c6c6cd;
+  --light-3: #a3a3a8;
+  --light-4: #868688;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: var(--foreground-default);
+  background-color: var(--background-root);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  * {
+    cursor: default;
+  }
+}
+
+h1 {
+  font-size: 4em;
+}
+
+@media(max-width: 768px) {
+  h1 {
+    font-size: 3em;
+  }
+}
