@@ -5,32 +5,35 @@ import useAppState from "app/hooks/useAppState";
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { rcss } from "app/tokens";
 
-function Test({
-  percentage
-}: {
-  percentage: MotionValue<number>;
-}) {
+function Test({ percentage }: { percentage: MotionValue<number> }) {
   const spring = useSpring(percentage, {
-    mass: 0.05
+    mass: 0.05,
   });
-  const width = useTransform(spring, w => `${w * 100}vw`)
+  const width = useTransform(spring, (w) => `${w * 100}vw`);
 
-  return <div css={[rcss.flex.grow(1), rcss.flex.column, {
-    background: 'rgb(250, 240, 230)'
-  }, rcss.align.start]}>
-    <motion.div
-      css={{
-        background: 'red',
-        height: 16
-      }}
-      style={{
-        width
-      }}
+  return (
+    <div
+      css={[
+        rcss.flex.grow(1),
+        rcss.flex.column,
+        {
+          background: "rgb(250, 240, 230)",
+        },
+        rcss.align.start,
+      ]}
     >
-    </motion.div>
-
-    aaaaaa
-  </div>
+      <motion.div
+        css={{
+          background: "red",
+          height: 16,
+        }}
+        style={{
+          width,
+        }}
+      ></motion.div>
+      aaaaaa
+    </div>
+  );
 }
 
 const Home: NextPage = () => {

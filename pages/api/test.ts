@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import nc from 'next-connect';
-import { TwitterApi } from 'twitter-api-v2';
+import { NextApiRequest, NextApiResponse } from "next";
+import nc from "next-connect";
+import { TwitterApi } from "twitter-api-v2";
 
 const app = nc();
 
@@ -13,7 +13,9 @@ const app = nc();
 //   accessSecret: process.env.TW_ACCESS_SECRET as string,
 // });
 
-const twitterClient = new TwitterApi('Q2E3dF9KcDg1clBTNTM0LTlyNGtCbjhIMFpsVlhMSlR4WS1HR3k3aEVKdVZzOjE2ODc0MzYxNjg5MjA6MTowOmF0OjE');
+const twitterClient = new TwitterApi(
+  "LW5vUWZINlJ2N0IzbGlrTVJWSEM3bDF3UjdnS0pJSjdfUEJEOW9JVG45bC1UOjE2ODc3Nzg4NjEzNTU6MTowOmF0OjE"
+);
 
 // Tell typescript it's a readonly app
 const readOnlyClient = twitterClient.readOnly;
@@ -21,10 +23,10 @@ const readOnlyClient = twitterClient.readOnly;
 app.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const user = await readOnlyClient.currentUserV2(true);
-    console.log(user, twitterClient)
-    res.json(user)
+    console.log(user, twitterClient);
+    res.json(user);
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 });
 

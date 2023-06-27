@@ -1,7 +1,11 @@
-import { NextApiHandler } from "next";
-import NextAuth, { NextAuthOptions } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import NextAuth, {
+  Account,
+  CallbacksOptions,
+  NextAuthOptions,
+  Profile,
+} from "next-auth";
 import Twitter from "next-auth/providers/twitter";
+import { UsernameDev, dev, UsernameProd } from "../../../server/lib/constants";
 
 const options: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
@@ -9,36 +13,60 @@ const options: NextAuthOptions = {
     Twitter({
       clientId: process.env.TW_CLIENT_ID as string,
       clientSecret: process.env.TW_CLIENT_SECRET as string,
-      version: "2.0"
+      version: "2.0",
     }),
   ],
   callbacks: {
     async jwt({
-      token, 
-      user, 
-      account = {}, 
-      profile, 
-      isNewUser
-    }) {
-      if(!account) throw new Error("Failed to access account")
-      
-      if (account.provider && !token[account.provider]) {
-        token[account.provider] = {};
+      token,
+      account,
+      profile,
+    }: Parameters<
+      CallbacksOptions<
+        Profile & {
+          data: {
+            id: string;
+            profile_image_url: string;
+            username: string;
+            name: string;
+          };
+        },
+        Account
+      >["jwt"]
+    >[0]) {
+      if (
+        !account ||
+        !account.access_token ||
+        !account.refresh_token ||
+        !profile
+      )
+        return;
+
+      let tokens: {
+        accessToken: string;
+        refreshToken: string;
+      } = {
+        accessToken: account.access_token,
+        refreshToken: account.refresh_token,
+      };
+
+      if (
+        dev
+          ? profile.data.username === UsernameDev ||
+            profile.data.username === UsernameProd
+          : profile.data.username === UsernameProd
+      ) {
+        console.log("Profile", profile.data);
+        console.log(tokens);
+      } else {
+        return;
       }
 
-      if (account.access_token && account.provider) {
-        (token[account.provider] as JWT).access_token = account.access_token;
-      }
-
-      if (account.refresh_token && account.provider) {
-        (token[account.provider] as JWT).refresh_token = account.refresh_token;
-      }
-
-      console.log(account)
-
-      return token;
+      return Object.assign(token, {
+        twitter: tokens,
+      });
     },
-  }
+  },
 };
 
 export default NextAuth(options);

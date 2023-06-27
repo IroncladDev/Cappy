@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
 import { SSRProvider } from "@react-aria/ssr";
 import { useEffect, useState } from "react";
 import { AppContext, scrollYAtom } from "app/state";

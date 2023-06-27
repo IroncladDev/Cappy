@@ -29,9 +29,10 @@ export default function ScrollSection({
       return;
     }
 
-    const heightValue = 1 -
+    const heightValue =
+      1 -
       (heightSpacer.height - window.innerHeight + heightSpacer.top) /
-      (heightSpacer.height - window.innerHeight);
+        (heightSpacer.height - window.innerHeight);
 
     if (heightValue >= 0 && heightValue <= 1) {
       percentage.set(heightValue);
@@ -40,7 +41,10 @@ export default function ScrollSection({
 
   return (
     <div css={[rcss.flex.row, rcss.width("100vw")]}>
-      <div css={[rcss.width(8), rcss.height(height || "auto")]} ref={initialHeightRef} />
+      <div
+        css={[rcss.width(8), rcss.height(height || "auto")]}
+        ref={initialHeightRef}
+      />
       {stick ? (
         <div
           css={[
