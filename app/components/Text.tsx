@@ -1,12 +1,23 @@
-import useTokens from "app/hooks/useTokens";
-import { rcss } from "app/tokens";
-import { HTMLMotionProps, motion, MotionProps } from "framer-motion";
+import { rcss, tokens } from "app/tokens";
+import { HTMLMotionProps, motion } from "framer-motion";
+import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
+
+const sanitize = (md: string) =>
+  sanitizeHtml(md, {
+    allowedTags: ["b", "i", "em", "strong", "a"],
+    allowedAttributes: {
+      a: ["href"],
+    },
+  });
 
 export default function Text({
   variant = "default",
   multiline,
   maxLines,
   color = "default",
+  children,
+  innerRef,
   ...props
 }: {
   variant?:
@@ -19,13 +30,18 @@ export default function Text({
   multiline?: boolean;
   maxLines?: number;
   color?: "default" | "dimmer" | "dimmest";
-} & HTMLMotionProps<"span">) {
-  const tokens = useTokens();
-
+  children: string;
+  innerRef?: React.RefObject<HTMLSpanElement>;
+} & Omit<HTMLMotionProps<"span">, "children">) {
   let fontSize = tokens.fontSizeDefault;
   let textColor = tokens.foregroundDefault;
   let lineHeight = tokens.lineHeightDefault;
   let fontWeight = tokens.fontWeightRegular;
+
+  const markdown = marked(children, {
+    headerIds: false,
+    mangle: false,
+  });
 
   switch (variant) {
     case "small":
@@ -65,24 +81,29 @@ export default function Text({
 
   return (
     <motion.span
+      ref={innerRef}
       css={[
         {
           color: textColor,
           fontSize,
           lineHeight,
           fontFamily:
-            variant === "default" || variant === "small"
-              ? tokens.fontFamilyDefault
-              : undefined,
+            variant === "headerBig" || variant === "headerDefault"
+              ? undefined
+              : tokens.fontFamilyDefault,
           fontWeight,
           display: "inline",
           overflowWrap: "break-word",
-          "& > a": {
+          "& a": {
             color: tokens.foregroundDimmest,
             textDecoration: "underline",
             "&:hover": {
               color: tokens.foregroundDimmer,
             },
+          },
+          "& strong": {
+            fontWeight: tokens.fontWeightBold,
+            color: tokens.foregroundDefault,
           },
         },
         multiline
@@ -99,7 +120,11 @@ export default function Text({
             }
           : null,
       ]}
-      {...props}
-    />
+      dangerouslySetInnerHTML={{ __html: sanitize(markdown) }}
+      {...{
+        ...props,
+        children: undefined,
+      }}
+    ></motion.span>
   );
 }

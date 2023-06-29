@@ -18,18 +18,21 @@
   --line-height-subhead-big: 1.2;
   --line-height-header-default: 1;
   --line-height-header-big: 1;
-
-  --dark-0: #000;
-  --dark-1: #27292a;
-  --dark-2: #434547;
-  --dark-3: #6e7072;
-  --dark-4: #a0a4a6;
   
-  --light-0: #fff;
-  --light-1: #ebebf0;
-  --light-2: #c6c6cd;
-  --light-3: #a3a3a8;
-  --light-4: #868688;
+  --foreground-default: #d7d9ee;
+  --foreground-dimmer: #9191ac;
+  --foreground-dimmest: #737387;
+
+  --accent-default: #f9c25e;
+  --accent-dimmer: #d39a31;
+  --accent-dimmest: #b98b37;
+
+  --background-root: rgb(10, 10, 25);
+  --background-default: rgb(15, 20, 35);
+  --background-higher: rgb(20, 30, 45);
+  --background-highest: rgb(25, 40, 55);
+
+  --font-family-default: 'IBM Plex Sans', sans-serif;
 }
 
 html,
@@ -46,20 +49,4 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-@media (max-width: 768px) {
-  * {
-    cursor: default;
-  }
-}
-
-h1 {
-  font-size: 4em;
-}
-
-@media(max-width: 768px) {
-  h1 {
-    font-size: 3em;
-  }
 }

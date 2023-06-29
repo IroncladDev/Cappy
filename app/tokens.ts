@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { CSSProperties } from "react";
 
-export const baseTokens = {
+const baseTokens = {
   fontWeightRegular: "var(--font-weight-regular)",
   fontWeightMedium: "var(--font-weight-medium)",
   fontWeightBold: "var(--font-weight-bold)",
@@ -21,6 +21,18 @@ export const baseTokens = {
   lineHeightHeaderBig: "var(--line-height-header-big)",
 
   fontFamilyDefault: `var(--font-family-default)`,
+  backgroundRoot: "var(--background-root)",
+  backgroundDefault: "var(--background-default)",
+  backgroundHigher: "var(--background-higher)",
+  backgroundHighest: "var(--background-highest)",
+
+  foregroundDimmer: "var(--foreground-dimmer)",
+  foregroundDimmest: "var(--foreground-dimmest)",
+  foregroundDefault: "var(--foreground-default)",
+
+  accentDefault: "var(--accent-default)",
+  accentDimmer: "var(--accent-dimmer)",
+  accentDimmest: "var(--accent-dimmest)",
 };
 
 export type Space =
@@ -40,7 +52,7 @@ export type Space =
   | 256;
 const toSpace = (space: Space) => `${space}px`;
 
-type BorderRadius = 0 | 1 | 2 | 4 | 8 | 12 | 16 | "full";
+type BorderRadius = Space | "full";
 const toBorderRadius = (radius: BorderRadius) => {
   if (radius === "full") {
     return "50%";
@@ -256,3 +268,5 @@ export const rcss = {
       background,
     }),
 };
+
+export const tokens = baseTokens;

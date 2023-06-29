@@ -2,15 +2,13 @@ import "../styles/globals.css";
 import { AppProps } from "next/app";
 import { SSRProvider } from "@react-aria/ssr";
 import { useEffect, useState } from "react";
-import { AppContext, scrollYAtom } from "app/state";
+import { AppContext } from "app/state";
 import HeadMetadata from "app/components/HeadMetadata";
 import { useMotionValue } from "framer-motion";
-import { useAtom } from "jotai";
 import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const [, setScrollY] = useAtom(scrollYAtom);
 
   const windowWidth = useMotionValue(0);
   const windowHeight = useMotionValue(0);
@@ -34,18 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       window.removeEventListener("resize", handler);
     };
   }, []);
-
-  useEffect(() => {
-    const handler = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handler);
-
-    return () => {
-      window.removeEventListener("scroll", handler);
-    };
-  }, [setScrollY]);
 
   return (
     <SSRProvider>
