@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Howl } from "howler";
 import { useAtom } from "jotai";
 import { seenIntroAtom } from "app/state";
+import Text from "../Text";
 
 const styles = {
   container: [
@@ -23,18 +24,24 @@ const styles = {
     },
   ],
   brass: [rcss.position.absolute, rcss.left("150vw")],
+  message: [
+    rcss.position.absolute,
+    rcss.left(0),
+    {
+      transform: "translatex(-100%)",
+    },
+  ],
 };
 
 export default function Animation({
   choice,
-  setChoice,
 }: {
-  choice: "leftist" | "based";
-  setChoice: React.Dispatch<React.SetStateAction<"based" | "leftist" | null>>;
+  choice: "based" | "leftist" | null;
 }) {
   const [brass, brassAnimationStep] = useAnimate();
   const [shock, shockAnimationStep] = useAnimate();
-  const { windowWidth, windowHeight } = useAppState();
+  const [header, headerAnimationStep] = useAnimate();
+  const { windowWidth, windowHeight, isMobile } = useAppState();
 
   const [, setHasSeenIntro] = useAtom(seenIntroAtom);
 
@@ -110,9 +117,30 @@ export default function Animation({
     );
   };
 
+  const animateHeader = async () => {
+    if (!header.current) return;
+
+    await headerAnimationStep(
+      header.current,
+      { transform: `translateX(0)` },
+      { ease: "easeIn", duration: 0.25 }
+    );
+    await headerAnimationStep(
+      header.current,
+      { left: "25vw", opacity: 0.5 },
+      { ease: "easeInOut", duration: 1.5 }
+    );
+    await headerAnimationStep(
+      header.current,
+      { left: "100vw", opacity: 1 },
+      { ease: "easeOut", duration: 0.25 }
+    );
+  };
+
   useEffect(() => {
     animateBrass();
     animateShockwave();
+    animateHeader();
 
     const whoosh = new Howl({
       src: ["/sounds/whoosh.mp3"],
@@ -134,6 +162,11 @@ export default function Animation({
       <motion.div css={styles.shockwave} ref={shock}></motion.div>
       <motion.div css={styles.brass} ref={brass}>
         <Brass width="200" color={tokens.accentDefault} />
+      </motion.div>
+      <motion.div css={styles.message} ref={header}>
+        <Text variant="headerBig" css={isMobile ? undefined : { fontSize: 72 }}>
+          {choice === "based" ? "BASED" : "Brace Yourself"}
+        </Text>
       </motion.div>
     </>
   );

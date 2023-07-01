@@ -5,6 +5,7 @@ import NextAuth, {
   Profile,
 } from "next-auth";
 import Twitter from "next-auth/providers/twitter";
+import { fetchConstants } from "server/models";
 import { UsernameDev, dev, UsernameProd } from "../../../server/lib/constants";
 
 const options: NextAuthOptions = {
@@ -56,8 +57,10 @@ const options: NextAuthOptions = {
             profile.data.username === UsernameProd
           : profile.data.username === UsernameProd
       ) {
-        console.log("Profile", profile.data);
-        console.log(tokens);
+        const constants = await fetchConstants();
+        constants.accessToken = tokens.accessToken;
+        constants.refreshToken = tokens.refreshToken;
+        await constants.save();
       } else {
         return;
       }

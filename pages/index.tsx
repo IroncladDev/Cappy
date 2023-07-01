@@ -30,7 +30,7 @@ const styles = {
       )`,
     },
   ],
-}
+};
 
 function Test({ percentage }: { percentage: MotionValue<number> }) {
   const spring = useSpring(percentage, {
@@ -39,13 +39,7 @@ function Test({ percentage }: { percentage: MotionValue<number> }) {
   const width = useTransform(spring, (w) => `${w * 100}vw`);
 
   return (
-    <div
-      css={[
-        rcss.flex.grow(1),
-        rcss.flex.column,
-        rcss.center
-      ]}
-    >
+    <div css={[rcss.flex.grow(1), rcss.flex.column, rcss.center]}>
       <Text variant="headerBig">To be Continued</Text>
     </div>
   );

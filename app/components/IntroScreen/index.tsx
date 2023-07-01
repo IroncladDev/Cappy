@@ -191,23 +191,25 @@ function Prompt({
   );
 }
 
-export default function IntroScreen({ isVisible }: { isVisible: boolean; }) {
+export default function IntroScreen({ isVisible }: { isVisible: boolean }) {
   const [choice, setChoice] = useState<"based" | "leftist" | null>(null);
 
   return (
     <AnimatePresence>
-      {isVisible && <motion.div
-        css={styles.container}
-        exit={{
-          opacity: 0,
-          transition: {
-            duration: 1,
-          },
-        }}
-      >
-        <Prompt setChoice={setChoice} choice={choice} />
-        {choice ? <Animation choice={choice} setChoice={setChoice} /> : null}
-      </motion.div>}
+      {isVisible && (
+        <motion.div
+          css={styles.container}
+          initial={{
+            clipPath: `polygon(0 0, 100% 0, 100% 100%, 0 100%)`,
+          }}
+          exit={{
+            clipPath: `polygon(0 0, 0% 0, 0% 100%, 0 100%)`,
+          }}
+        >
+          <Prompt setChoice={setChoice} choice={choice} />
+          {choice ? <Animation choice={choice} /> : null}
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 }

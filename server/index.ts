@@ -1,7 +1,6 @@
 import express from "express";
 import next from "next";
 import cron from "node-cron";
-import pullTweets from "./pullTweets";
 
 const app = express();
 
@@ -10,7 +9,7 @@ const nextApp = next({ dev });
 const nextHandler = nextApp.getRequestHandler();
 
 cron.schedule("0 0 * * *", () => {
-  pullTweets();
+  
 });
 
 nextApp.prepare().then(() => {
