@@ -33,6 +33,12 @@ const baseTokens = {
   accentDefault: "var(--accent-default)",
   accentDimmer: "var(--accent-dimmer)",
   accentDimmest: "var(--accent-dimmest)",
+
+  outlineDimmest: "var(--outline-dimmest)",
+  outlineDimmer: "var(--outline-dimmer)",
+  outlineDefault: "var(--outline-default)",
+
+  maxBodyWidth: 1000,
 };
 
 export type Space =
@@ -71,15 +77,6 @@ export const rcss = {
   pb: (space: Space) => css({ paddingBottom: toSpace(space) }),
   pl: (space: Space) => css({ paddingLeft: toSpace(space) }),
   pr: (space: Space) => css({ paddingRight: toSpace(space) }),
-  m: (space: Space) => css({ margin: toSpace(space) }),
-  mx: (space: Space) =>
-    css({ marginLeft: toSpace(space), marginRight: toSpace(space) }),
-  my: (space: Space) =>
-    css({ marginTop: toSpace(space), marginBottom: toSpace(space) }),
-  mt: (space: Space) => css({ marginTop: toSpace(space) }),
-  mb: (space: Space) => css({ marginBottom: toSpace(space) }),
-  ml: (space: Space) => css({ marginLeft: toSpace(space) }),
-  mr: (space: Space) => css({ marginRight: toSpace(space) }),
 
   position: {
     static: css({ position: "static" }),
@@ -96,6 +93,7 @@ export const rcss = {
     columnReverse: css({ display: "flex", flexDirection: "column-reverse" }),
     grow: (flexGrow: number) => css({ flexGrow }),
     growAndShrink: (flex: number) => css({ flexGrow: flex, flexShrink: flex }),
+    basis: (basis: Space) => css({ flexBasis: toSpace(basis) }),
     shrink: (flex: number) => css({ flexShrink: flex }),
     wrap: css({ flexWrap: "wrap" }),
     wrapReverse: css({ flexWrap: "wrap-reverse" }),
@@ -109,11 +107,6 @@ export const rcss = {
     flex: css({ display: "flex" }),
     inlineFlex: css({ display: "inline-flex" }),
     grid: css({ display: "grid" }),
-  },
-
-  visibility: {
-    visible: css({ visibility: "visible" }),
-    hidden: css({ visibility: "hidden" }),
   },
 
   center: css({ alignItems: "center", justifyContent: "center" }),
@@ -134,18 +127,6 @@ export const rcss = {
     spaceAround: css({ justifyContent: "space-around" }),
     spaceEvenly: css({ justifyContent: "space-evenly" }),
   },
-
-  srOnly: css({
-    position: "absolute",
-    width: "1px",
-    height: "1px",
-    padding: 0,
-    margin: -1,
-    overflow: "hidden",
-    clip: "rect(0,0,0,0)",
-    whiteSpace: "nowrap",
-    borderWidth: 0,
-  }),
 
   rowWithGap: (space: Space) =>
     css({
@@ -185,11 +166,6 @@ export const rcss = {
     });
   },
 
-  font: {
-    default: css({ fontFamily: "var(--font-family-default)" }),
-    code: css({ fontFamily: "var(--font-family-code)" }),
-  },
-
   fontWeight: {
     normal: css({ fontWeight: "var(--font-weight-regular)" }),
     medium: css({ fontWeight: "var(--font-weight-medium)" }),
@@ -203,13 +179,6 @@ export const rcss = {
     center: css({ textAlign: "center" }),
     right: css({ textAlign: "right" }),
   },
-
-  backgroundImage: (url: string) =>
-    css({
-      backgroundImage: `url("${url}")`,
-      backgroundPosition: "center",
-      backgroundSize: "cover",
-    }),
 
   cursor: {
     pointer: css({ cursor: "pointer" }),
@@ -238,7 +207,6 @@ export const rcss = {
 
   truncate: css({
     display: "inline-block",
-    lineHeight: 1.2,
     maxWidth: "100%",
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -263,7 +231,7 @@ export const rcss = {
     }),
   },
 
-  background: (background: string) =>
+  bg: (background: string) =>
     css({
       background,
     }),

@@ -4,7 +4,7 @@ export default function HeadMetadata() {
   return (
     <Head>
       <title>Declaration of Memes</title>
-      <meta property="og:title" content="Framer Boilerplate" />
+      <meta property="og:title" content="Declaration of Memes" />
       <meta name="description" content="This is a framer boilerplate" />
       <meta property="og:description" content="This is a framer boilerplate" />
       <link rel="icon" href="/logo/32-round.webp" type="image/webp" />

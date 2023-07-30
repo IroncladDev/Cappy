@@ -19,3 +19,6 @@ pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
 [deployment]
 build = ["sh", "-c", "npm run build"]
 run = ["sh", "-c", "npm run start"]
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]

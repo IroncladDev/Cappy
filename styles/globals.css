@@ -27,10 +27,14 @@
   --accent-dimmer: #d39a31;
   --accent-dimmest: #b98b37;
 
-  --background-root: rgb(10, 10, 25);
-  --background-default: rgb(15, 20, 35);
-  --background-higher: rgb(20, 30, 45);
-  --background-highest: rgb(25, 40, 55);
+  --background-root: #1d1f2f;
+  --background-default: #2f3146;
+  --background-higher: #34364b;
+  --background-highest: #404258;
+
+  --outline-dimmest: #585a74;
+  --outline-dimmer: #737691;
+  --outline-default: #9193ac;
 
   --font-family-default: 'IBM Plex Sans', sans-serif;
 }

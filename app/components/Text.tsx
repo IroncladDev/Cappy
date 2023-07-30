@@ -30,7 +30,7 @@ export default function Text({
   multiline?: boolean;
   maxLines?: number;
   color?: "default" | "dimmer" | "dimmest";
-  children: string;
+  children: React.ReactNode;
   innerRef?: React.RefObject<HTMLSpanElement>;
 } & Omit<HTMLMotionProps<"span">, "children">) {
   let fontSize = tokens.fontSizeDefault;
@@ -38,7 +38,7 @@ export default function Text({
   let lineHeight = tokens.lineHeightDefault;
   let fontWeight = tokens.fontWeightRegular;
 
-  const markdown = marked(children, {
+  const markdown = marked(typeof children === "string" ? children : "", {
     headerIds: false,
     mangle: false,
   });
@@ -120,10 +120,14 @@ export default function Text({
             }
           : null,
       ]}
-      dangerouslySetInnerHTML={{ __html: sanitize(markdown) }}
+      dangerouslySetInnerHTML={
+        typeof children === "string"
+          ? { __html: sanitize(markdown) }
+          : undefined
+      }
       {...{
         ...props,
-        children: undefined,
+        children: typeof children === "string" ? undefined : children,
       }}
     ></motion.span>
   );

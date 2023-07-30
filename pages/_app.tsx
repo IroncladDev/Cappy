@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { AppContext } from "app/state";
 import HeadMetadata from "app/components/HeadMetadata";
 import { useMotionValue } from "framer-motion";
-import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isMobile, setIsMobile] = useState(false);
@@ -35,18 +34,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <SSRProvider>
-      <SessionProvider>
-        <AppContext.Provider
-          value={{
-            isMobile,
-            windowWidth,
-            windowHeight,
-          }}
-        >
-          <HeadMetadata />
-          <Component {...pageProps} />
-        </AppContext.Provider>
-      </SessionProvider>
+      <AppContext.Provider
+        value={{
+          isMobile,
+          windowWidth,
+          windowHeight,
+        }}
+      >
+        <HeadMetadata />
+        <Component {...pageProps} />
+      </AppContext.Provider>
     </SSRProvider>
   );
 }
