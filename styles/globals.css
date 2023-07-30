@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
 
 :root {
   --font-weight-regular: 400;
@@ -20,7 +20,7 @@
   --line-height-header-big: 1;
   
   --foreground-default: #d7d9ee;
-  --foreground-dimmer: #9191ac;
+  --foreground-dimmer: #9d9db9;
   --foreground-dimmest: #737387;
 
   --accent-default: #f9c25e;
@@ -36,7 +36,7 @@
   --outline-dimmer: #737691;
   --outline-default: #9193ac;
 
-  --font-family-default: 'IBM Plex Sans', sans-serif;
+  --font-family-default: 'Open Sans', sans-serif;
 }
 
 html,

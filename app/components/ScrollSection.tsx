@@ -7,6 +7,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
+import { constrain } from "app/lib/algs";
 
 const styles = {
   outerContainer: [rcss.flex.row, rcss.width("100vw")],
@@ -57,9 +58,7 @@ const ScrollSection = memo(
         (heightSpacer.height - window.innerHeight + heightSpacer.top) /
           (heightSpacer.height - window.innerHeight);
 
-      if (heightValue >= 0 && heightValue <= 1) {
-        percentage.set(heightValue);
-      }
+      percentage.set(constrain(heightValue, 0, 1));
     });
 
     return (
