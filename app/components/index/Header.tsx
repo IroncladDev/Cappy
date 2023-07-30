@@ -6,6 +6,7 @@ import Canvas from "./Canvas";
 import { useRef } from "react";
 import { constrain } from "app/lib/algs";
 import { homepage } from "app/config";
+import useAppState from "app/hooks/useAppState";
 
 function SliceClip({ percentage }: { percentage: MotionValue<number> }) {
   const percentageLastQuarter = useTransform(percentage, (p) =>
@@ -39,6 +40,8 @@ export default function IndexHeader({
 }) {
   const contentBgRef = useRef<HTMLDivElement>(null);
 
+  const { isMobile } = useAppState();
+
   const onFlash = async () => {
     console.log("Called");
     contentBgRef.current.style.background = "rgba(255, 255, 255, 0.5)";
@@ -52,33 +55,80 @@ export default function IndexHeader({
     <>
       <SliceClip percentage={percentage} />
       <div css={[rcss.flex.grow(1), rcss.grid.stack]}>
-        <div css={[rcss.grid.stackElement]}>
-          <h1>Oh hi</h1>
+        <div
+          css={[
+            rcss.grid.stackElement,
+            rcss.flex.column,
+            rcss.p(16),
+            rcss.center,
+          ]}
+        >
+          <div
+            css={
+              isMobile
+                ? [rcss.flex.column, rcss.colWithGap(16), rcss.center]
+                : [
+                    rcss.flex.row,
+                    rcss.rowWithGap(16),
+                    rcss.maxWidth(tokens.maxBodyWidth),
+                    rcss.center,
+                  ]
+            }
+          >
+            <div
+              css={[rcss.flex.column, rcss.colWithGap(16), rcss.maxWidth(480)]}
+            >
+              <Text variant="headerDefault">{homepage.intro.title}</Text>
+              <div css={[rcss.flex.column, rcss.colWithGap(8)]}>
+                {homepage.intro.paragraphs.map((p, i) => (
+                  <Text key={i} color="dimmer" multiline>
+                    {p}
+                  </Text>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <img
+                src="/logo/400-round.webp"
+                width="256"
+                height="256"
+                css={{
+                  maxWidth: "80vw",
+                  maxHeight: "80vw",
+                  border: `solid 2px ${tokens.outlineDimmest}`,
+                  borderRadius: "50%",
+                }}
+              />
+            </div>
+          </div>
         </div>
-        
+
         <div
           css={[
             rcss.flex.grow(1),
             rcss.grid.stack,
             rcss.grid.stackElement,
+            rcss.linearGradient(0, [
+              tokens.backgroundRoot,
+              tokens.backgroundDefault,
+            ]),
             {
               clipPath: "url(#slicer)",
             },
           ]}
         >
-          <div
-            css={[
-              rcss.grid.stackElement,
-              rcss.position.relative,
-              rcss.zIndex(0),
-              rcss.linearGradient(0, [
-                tokens.backgroundRoot,
-                tokens.backgroundDefault,
-              ]),
-            ]}
-          >
-            <Canvas percentage={percentage} onFlash={onFlash} />
-          </div>
+          {isMobile ? null : (
+            <div
+              css={[
+                rcss.grid.stackElement,
+                rcss.position.relative,
+                rcss.zIndex(0),
+              ]}
+            >
+              <Canvas percentage={percentage} onFlash={onFlash} />
+            </div>
+          )}
 
           <div
             css={[
@@ -135,7 +185,7 @@ export default function IndexHeader({
                             {t.text}{" "}
                           </span>
                         ) : (
-                          <span key={i}>{t.text}{" "}</span>
+                          <span key={i}>{t.text} </span>
                         )
                       )}
                     </Text>
@@ -146,11 +196,13 @@ export default function IndexHeader({
                     </Text>
                   </div>
 
-                  <Text multiline color="dimmer">{homepage.header.description}</Text>
+                  <Text multiline color="dimmer">
+                    {homepage.header.description}
+                  </Text>
                 </div>
               </div>
 
-              <div css={[rcss.flex.growAndShrink(1), rcss.flex.basis(0)]}></div>
+              <div css={[rcss.flex.growAndShrink(1), rcss.flex.basis(0)]} />
             </div>
           </motion.div>
         </div>

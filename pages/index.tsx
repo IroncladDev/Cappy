@@ -2,6 +2,7 @@ import ScrollSection from "app/components/ScrollSection";
 import type { NextPage } from "next";
 import useAppState from "app/hooks/useAppState";
 import IndexHeader from "app/components/index/Header";
+import { rcss, tokens } from "app/tokens";
 
 const Home: NextPage = () => {
   const { isMobile } = useAppState();
@@ -14,8 +15,17 @@ const Home: NextPage = () => {
         </ScrollSection>
         <ScrollSection height={isMobile ? "200vh" : "300vh"}>
           {(p) => (
-            <div>
-              <h1>Oh hi</h1>
+            <div
+              css={[
+                rcss.flex.column,
+                rcss.center,
+                rcss.flex.grow(1),
+                {
+                  background: tokens.backgroundHigher,
+                },
+              ]}
+            >
+              <h1>To be continued</h1>
             </div>
           )}
         </ScrollSection>
