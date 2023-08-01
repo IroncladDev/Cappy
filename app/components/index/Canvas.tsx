@@ -1,4 +1,4 @@
-import { constrain } from "app/lib/algs";
+import { constrain, pOffset } from "app/lib/algs";
 import {
   MotionValue,
   useMotionValueEvent,

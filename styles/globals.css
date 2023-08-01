@@ -29,8 +29,8 @@
 
   --background-root: #1d1f2f;
   --background-default: #2f3146;
-  --background-higher: #34364b;
-  --background-highest: #404258;
+  --background-higher: #3d3f57;
+  --background-highest: #52556f;
 
   --outline-dimmest: #585a74;
   --outline-dimmer: #737691;
@@ -53,4 +53,8 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
 }

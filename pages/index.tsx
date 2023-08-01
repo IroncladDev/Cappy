@@ -25,7 +25,7 @@ const Home: NextPage = () => {
                 },
               ]}
             >
-              <h1>To be continued</h1>
+              <h1>Merch shall come soon</h1>
             </div>
           )}
         </ScrollSection>

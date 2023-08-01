@@ -4,13 +4,14 @@ import HeaderFlag from "./HeaderFlag";
 import Text from "../Text";
 import Canvas from "./Canvas";
 import { useRef } from "react";
-import { constrain } from "app/lib/algs";
+import { constrain, pOffset } from "app/lib/algs";
 import { homepage } from "app/config";
 import useAppState from "app/hooks/useAppState";
+import Intro from "./Intro";
 
 function SliceClip({ percentage }: { percentage: MotionValue<number> }) {
   const percentageLastQuarter = useTransform(percentage, (p) =>
-    constrain((p - 0.75) * 4, 0, 1)
+    pOffset(p, 0.75)
   );
 
   const smoothPercentage = useSpring(percentageLastQuarter, {
@@ -55,54 +56,7 @@ export default function IndexHeader({
     <>
       <SliceClip percentage={percentage} />
       <div css={[rcss.flex.grow(1), rcss.grid.stack]}>
-        <div
-          css={[
-            rcss.grid.stackElement,
-            rcss.flex.column,
-            rcss.p(16),
-            rcss.center,
-          ]}
-        >
-          <div
-            css={
-              isMobile
-                ? [rcss.flex.column, rcss.colWithGap(16), rcss.center]
-                : [
-                    rcss.flex.row,
-                    rcss.rowWithGap(16),
-                    rcss.maxWidth(tokens.maxBodyWidth),
-                    rcss.center,
-                  ]
-            }
-          >
-            <div
-              css={[rcss.flex.column, rcss.colWithGap(16), rcss.maxWidth(480)]}
-            >
-              <Text variant="headerDefault">{homepage.intro.title}</Text>
-              <div css={[rcss.flex.column, rcss.colWithGap(8)]}>
-                {homepage.intro.paragraphs.map((p, i) => (
-                  <Text key={i} color="dimmer" multiline>
-                    {p}
-                  </Text>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <img
-                src="/logo/400-round.webp"
-                width="256"
-                height="256"
-                css={{
-                  maxWidth: "80vw",
-                  maxHeight: "80vw",
-                  border: `solid 2px ${tokens.outlineDimmest}`,
-                  borderRadius: "50%",
-                }}
-              />
-            </div>
-          </div>
-        </div>
+        <Intro percentage={percentage} />
 
         <div
           css={[
