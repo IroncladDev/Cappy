@@ -2,34 +2,19 @@ import ScrollSection from "app/components/ScrollSection";
 import type { NextPage } from "next";
 import useAppState from "app/hooks/useAppState";
 import IndexHeader from "app/components/index/Header";
-import { rcss, tokens } from "app/tokens";
+import ShopPreview from "app/components/index/ShopPreview";
 
 const Home: NextPage = () => {
   const { isMobile } = useAppState();
 
   return (
     <>
-      <div>
-        <ScrollSection height={isMobile ? "200vh" : "300vh"}>
-          {(p) => <IndexHeader percentage={p} />}
-        </ScrollSection>
-        <ScrollSection height={isMobile ? "200vh" : "300vh"}>
-          {(p) => (
-            <div
-              css={[
-                rcss.flex.column,
-                rcss.center,
-                rcss.flex.grow(1),
-                {
-                  background: tokens.backgroundHigher,
-                },
-              ]}
-            >
-              <h1>Merch shall come soon</h1>
-            </div>
-          )}
-        </ScrollSection>
-      </div>
+      <ScrollSection height={isMobile ? "150vh" : "300vh"}>
+        {(p) => <IndexHeader percentage={p} />}
+      </ScrollSection>
+      <ScrollSection height={isMobile ? "auto" : "300vh"} stick={!isMobile}>
+        {(p) => <ShopPreview percentage={p} />}
+      </ScrollSection>
     </>
   );
 };

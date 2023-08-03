@@ -10,17 +10,21 @@ import useAppState from "app/hooks/useAppState";
 import Intro from "./Intro";
 
 function SliceClip({ percentage }: { percentage: MotionValue<number> }) {
+  const { isMobile } = useAppState();
+
   const percentageLastQuarter = useTransform(percentage, (p) =>
-    pOffset(p, 0.75)
+    isMobile ? p : pOffset(p, 0.75)
   );
 
   const smoothPercentage = useSpring(percentageLastQuarter, {
     mass: 0.1,
   });
 
-  const y = useTransform(smoothPercentage, (v) => 0.5 + v / 2);
+  const y = useTransform(smoothPercentage, (v) => constrain(0.5 + v / 2, 0, 1));
 
-  const height = useTransform(smoothPercentage, (v) => 0.5 - v / 2);
+  const height = useTransform(smoothPercentage, (v) =>
+    constrain(0.5 - v / 2, 0, 1)
+  );
 
   return (
     <svg width="0" height="0">

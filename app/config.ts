@@ -24,4 +24,34 @@ export const homepage = {
       "Nulla vitae erat eget nisl lobortis tincidunt. Curabitur ac lectus quis, ultrices nisi.",
     ],
   },
+  shop: {
+    title: "Based Merch",
+    storeButton: {
+      text: "View All",
+      href: "https://www.amazon.com/s/ref=bl_sl_s_ap_web_7141123011?ie=UTF8&node=7141123011&field-brandtextbin=Liberty+Swag",
+    },
+    description: "Check out my store on Amazon for more!",
+    international: [
+      {
+        title: "Español",
+        href: "https://x.com",
+        flag: "🇪🇸",
+      },
+      {
+        title: "Deutsch",
+        href: "https://x.com",
+        flag: "🇩🇪",
+      },
+      {
+        title: "中文",
+        href: "https://x.com",
+        flag: "🇨🇳",
+      },
+      {
+        title: "日本語",
+        href: "https://x.com",
+        flag: "🇯🇵",
+      },
+    ],
+  },
 };

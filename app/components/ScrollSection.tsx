@@ -16,14 +16,13 @@ const styles = {
     rcss.flex.column,
     rcss.position.sticky,
     rcss.top(0),
-    rcss.width("100%"),
-    //rcss.overflowX("hidden"),
+    rcss.width("100vw"),
   ],
   contentContainer: [
     rcss.flex.grow(1),
     rcss.flex.column,
     rcss.top(0),
-    rcss.width("100%"),
+    rcss.width("100vw"),
     rcss.overflowX("hidden"),
   ],
 };

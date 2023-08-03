@@ -4,7 +4,7 @@ export const constrain = (value: number, min: number = 0, max: number = 1) =>
 export const pOffset = (
   p: number,
   offset: number,
-  options: {
+  options?: {
     frac?: number;
     constrain?: boolean;
   }
@@ -13,7 +13,7 @@ export const pOffset = (
   const coffset = constrain(offset, 0, 1);
   const cfrac = constrain(options?.frac || 1 - offset, 0, 1);
 
-  return options?.constrain
+  return options?.constrain !== false
     ? constrain((cp - coffset) * (1 / cfrac), 0, 1)
     : (cp - coffset) * (1 / cfrac);
 };

@@ -5,9 +5,13 @@ import { useEffect, useState } from "react";
 import { AppContext } from "app/state";
 import HeadMetadata from "app/components/HeadMetadata";
 import { useMotionValue } from "framer-motion";
+import Nav from "app/components/Nav";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isMobile, setIsMobile] = useState(false);
+
+  const router = useRouter();
 
   const windowWidth = useMotionValue(0);
   const windowHeight = useMotionValue(0);
@@ -32,6 +36,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, []);
 
+  useEffect(() => {
+    if (router.asPath === "/#about") {
+      window.scrollTo(
+        0,
+        window.innerHeight * (isMobile ? 1.5 : 3) - window.innerHeight
+      );
+    }
+  }, [router.asPath, isMobile]);
+
   return (
     <SSRProvider>
       <AppContext.Provider
@@ -43,6 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <HeadMetadata />
         <Component {...pageProps} />
+        <Nav />
       </AppContext.Provider>
     </SSRProvider>
   );

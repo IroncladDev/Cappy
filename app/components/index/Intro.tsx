@@ -1,7 +1,13 @@
 import { homepage } from "app/config";
 import useAppState from "app/hooks/useAppState";
 import { rcss, tokens } from "app/tokens";
-import { MotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  MotionValue,
+  useAnimate,
+  useMotionValueEvent,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import Text from "../Text";
 import Button from "../ui/Button";
 import { motion } from "framer-motion";
@@ -41,13 +47,14 @@ export default function Intro({
 }: {
   percentage: MotionValue<number>;
 }) {
+  const [scope, animate] = useAnimate();
   const { isMobile } = useAppState();
 
-  const pc = useSpring(percentage, {
-    mass: 0.05,
+  const pSmooth = useSpring(percentage, {
+    mass: 0.1,
   });
 
-  const p = useTransform(pc, (v) =>
+  const p = useTransform(pSmooth, (v) =>
     pOffset(v, 0.75, {
       frac: 0.15,
     })
@@ -57,11 +64,56 @@ export default function Intro({
   const translateX = useTransform(preScale, (v) => `${-(1 - v) * 100}%`);
   const titleX = useTransform(preScale, (v) => `${100 - v * 100}%`);
 
+  const flashAnimation = async () => {
+    await animate(
+      scope.current,
+      {
+        filter: `drop-shadow(0 0 0px rgba(215, 217, 238, 0.5))`,
+      },
+      {
+        duration: 0,
+      }
+    );
+    await animate(
+      scope.current,
+      {
+        filter: `drop-shadow(0 0 100px rgba(215, 217, 238, 0))`,
+      },
+      {
+        duration: 1,
+      }
+    );
+    await animate(
+      scope.current,
+      {
+        filter: `drop-shadow(0 0 0px rgba(215, 217, 238, 0))`,
+      },
+      {
+        duration: 0,
+      }
+    );
+    await animate(
+      scope.current,
+      {
+        filter: `drop-shadow(0 0 0px rgba(215, 217, 238, 0.5))`,
+      },
+      {
+        duration: 0,
+      }
+    );
+  };
+
+  useMotionValueEvent(p, "change", (v) => {
+    if (v === 1) {
+      flashAnimation();
+    }
+  });
+
   return (
     <div
       css={[rcss.grid.stackElement, rcss.flex.column, rcss.p(16), rcss.center]}
     >
-      <div
+      <motion.div
         css={
           isMobile
             ? [rcss.flex.column, rcss.colWithGap(16), rcss.center]
@@ -72,15 +124,16 @@ export default function Intro({
                 rcss.center,
               ]
         }
+        ref={scope}
       >
-        <div css={[rcss.flex.column, rcss.colWithGap(8)]}>
+        <div css={[rcss.flex.column, rcss.colWithGap(8), rcss.align.center]}>
           <motion.img
             src="/logo/400-round.webp"
             width="240"
             height="240"
             css={{
-              maxWidth: "80vw",
-              maxHeight: "80vw",
+              maxWidth: "30vh",
+              maxHeight: "30vh",
               border: `solid 2px ${tokens.outlineDimmest}`,
               borderRadius: "50%",
             }}
@@ -134,7 +187,7 @@ export default function Intro({
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
