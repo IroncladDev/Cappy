@@ -54,4 +54,55 @@ export const homepage = {
       },
     ],
   },
+  contacts: {
+    header: "All the Memes",
+  },
+  accounts: {
+    main: {
+      username: "LibertyCappy",
+      displayName: "Declaration of Memes",
+      image: "/images/accounts/libertycappy.jpeg",
+      bio: "Liberty Maximalist 🖤💛 Pro: Liberty, Free Markets, Family, Homesteading, Charity, Homeschool, Satire, Arms, Natural Rights -Anti: Tyranny, War, Taxes, Violence",
+      url: "https://twitter.com/LibertyCappy",
+    },
+    secondary: [
+      {
+        username: "GigaBasedTrad",
+        displayName: "Giga Based Trad",
+        bio: "Unapologetically Christian and Based. Liberty Maximalist. Pro: God, Family, Homesteading, Scripture, Memes, Homeschooling, Self-Sufficiency, Hunting, Community.",
+        image: "/images/accounts/gigabasedtrad.jpeg",
+        url: "https://twitter.com/GigaBasedTrad",
+      },
+      {
+        username: "SpillTheMemes",
+        displayName: "Spill The Memes",
+        bio: "This is a place to enjoy humor without all the constant politics. Come here and disconnect and have a good laugh!",
+        image: "/images/accounts/spillthememes.jpeg",
+        url: "https://twitter.com/SpillTheMemes",
+      },
+      {
+        username: "LPTubularCaucus",
+        displayName: "Libertarian Party Tubular Caucus",
+        bio: "Radical? No. Gnarly? No. We're Tubular. 😎 - Follow me for hilarious political satire. 💪",
+        image: "/images/accounts/lptubularcaucus.jpeg",
+        url: "https://twitter.com/LPTubularCaucus",
+      },
+      {
+        username: "ChristianPunsOG",
+        displayName: "Christian Memes and Puns",
+        bio: "Christian. Puns. Memes. Satire. Family. Church. Nerd. Life. Liberty. Community. Homeschooling. Homesteading. Freedom. Joy. Scripture.",
+        image: "/images/accounts/christianpuns.jpeg",
+        url: "https://twitter.com/ChristianPunsOG",
+      },
+      {
+        username: "CappyLibertad",
+        displayName: "Cappy el Carpincho Capitalista",
+        bio: "El administrador de @LibertyCappy - De Mexico 🇲🇽 con familia en España 🇪🇸 - Inmigrante a Texas 🤠 - Libertad absoluta 💛🖤",
+        image: "/images/accounts/cappylibertad.jpeg",
+        url: "https://twitter.com/CappyLibertad",
+      },
+    ],
+  },
 };
+
+export const newsletterUrl = "https://forms.gle/ay7Q6Vx7UcPcNCh97";
