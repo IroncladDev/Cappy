@@ -111,7 +111,7 @@ export const newsletterUrl = "https://forms.gle/ay7Q6Vx7UcPcNCh97";
 
 export const footer = {
   siteLinks: [
-    ["Home", "/"],
+    ["Home", "/#"],
     ["About", "/#about"],
     ["Shop", "/#shop"],
     ["Contact", "/#contact"],

@@ -89,7 +89,7 @@ interface NavLink {
 const links: Array<NavLink> = [
   {
     text: "Home",
-    href: "/",
+    href: "/#",
     icon: <Home color={tokens.foregroundDimmer} size={20} />,
   },
   {
