@@ -55,7 +55,9 @@ export const homepage = {
     ],
   },
   contacts: {
-    header: "All the Memes",
+    header: "All Things Funny",
+    description:
+      "Find all of my memes on my different social media accounts.  Feel free to hit me up by sending me a direct message.",
   },
   accounts: {
     main: {

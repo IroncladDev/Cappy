@@ -1,9 +1,10 @@
 import { rcss, tokens } from "app/tokens";
-import { MotionValue, motion } from "framer-motion";
+import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { homepage } from "app/config";
 import Text from "../Text";
 import Button from "../ui/Button";
 import { Facebook, Instagram, Mail } from "react-feather";
+import { useRef } from "react";
 
 function AccountCard({
   account,
@@ -30,23 +31,17 @@ function AccountCard({
           {
             border: `solid 1px ${tokens.backgroundHigher}`,
             flex: "1 1 0",
-            minWidth: 0
+            minWidth: 0,
           },
         ]}
         initial={{
           background: tokens.backgroundRoot,
-          opacity: 0,
-          y: "50%",
-        }}
-        whileInView={{
-          opacity: 1,
-          y: "0%",
         }}
         whileHover={{
           background: tokens.backgroundDefault,
         }}
         transition={{
-          duration: 0.5,
+          duration: 0.25,
         }}
       >
         {large ? (
@@ -125,73 +120,147 @@ function AccountCard({
   );
 }
 
-export default function Contacts() {
+export default function Contacts({
+  percentage,
+}: {
+  percentage: MotionValue<number>;
+}) {
+  const accountsRef = useRef<HTMLDivElement>(null);
+  const accountContainerRef = useRef<HTMLDivElement>(null);
+
+  const smooth = useSpring(percentage, {
+    mass: 0.1,
+  });
+
+  const y = useTransform(smooth, (v) => {
+    if (accountsRef.current && accountContainerRef.current) {
+      const containerHeight =
+        accountsRef.current.getBoundingClientRect().height -
+        accountContainerRef.current.getBoundingClientRect().height;
+
+      return v * -containerHeight;
+    }
+
+    return 0;
+  });
+
   return (
     <div
       css={[
         rcss.flex.column,
-        rcss.align.center,
+        rcss.flex.grow(1),
+        rcss.center,
         rcss.px(16),
-        rcss.py(64),
         {
-          background: tokens.backgroundRoot,
+          background: `linear-gradient(0deg, ${tokens.backgroundRoot}, ${tokens.backgroundDefault})`,
+          borderTop: `solid 2px ${tokens.backgroundHigher}`,
         },
       ]}
       id="contact"
     >
       <div
         css={[
-          rcss.flex.column,
-          rcss.colWithGap(16),
+          rcss.flex.row,
+          rcss.rowWithGap(16),
+          rcss.center,
           rcss.maxWidth(tokens.maxBodyWidth),
+          rcss.width("100vw"),
         ]}
       >
-        <Text
-          variant="headerDefault"
-          css={{ textAlign: "center", marginBottom: 32 }}
+        <div
+          css={[
+            rcss.flex.column,
+            rcss.colWithGap(32),
+            {
+              flex: "1 1 0",
+              minWidth: 0,
+            },
+          ]}
         >
-          {homepage.contacts.header}
-        </Text>
+          <div css={[rcss.flex.column, rcss.colWithGap(16)]}>
+            <Text variant="headerDefault">{homepage.contacts.header}</Text>
+            <Text color="dimmer" multiline>
+              {homepage.contacts.description}
+            </Text>
+          </div>
 
-        <div css={[rcss.flex.row, rcss.rowWithGap(16)]}>
-          <AccountCard account={homepage.accounts.main} large />
-
-          <div css={[rcss.flex.column, rcss.colWithGap(16), rcss.flex.grow(1)]}>
-            <Button
-              text="Facebook"
-              href="https://facebook.com"
-              css={{ width: "100%" }}
-              iconLeft={<Facebook color={tokens.foregroundDefault} size={16} />}
-            />
-            <Button
-              text="Instagram"
-              href="https://facebook.com"
-              css={{ width: "100%" }}
-              iconLeft={
-                <Instagram color={tokens.foregroundDefault} size={16} />
-              }
-            />
-            <Button
-              text="Newsletter"
-              href="/newsletter"
-              css={{ width: "100%" }}
-              iconLeft={<Mail color={tokens.foregroundDefault} size={16} />}
-            />
+          <div css={[rcss.flex.column, rcss.colWithGap(16)]}>
+            <AccountCard large account={homepage.accounts.main} />
+            <div
+              css={[
+                rcss.flex.row,
+                rcss.rowWithGap(16),
+                rcss.width("100%"),
+                {
+                  "& a": {
+                    flexGrow: 1,
+                    display: "flex",
+                  },
+                },
+              ]}
+            >
+              <Button
+                iconLeft={
+                  <Facebook color={tokens.foregroundDefault} size={16} />
+                }
+                text="Facebook"
+                href="https://facebook.com"
+                css={rcss.flex.grow(1)}
+              />
+              <Button
+                iconLeft={
+                  <Instagram color={tokens.foregroundDefault} size={16} />
+                }
+                text="Instagram"
+                href="https://instagram.com"
+                css={rcss.flex.grow(1)}
+              />
+              <Button
+                iconLeft={<Mail color={tokens.foregroundDefault} size={16} />}
+                text="Newsletter"
+                href="/newsletter"
+                css={rcss.flex.grow(1)}
+              />
+            </div>
           </div>
         </div>
 
         <div
           css={[
+            rcss.flex.column,
+            rcss.position.relative,
+            rcss.height("100%"),
+            rcss.minWidth(0),
             {
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-              gap: 16,
+              flex: "1 1 0",
             },
           ]}
         >
-          {homepage.accounts.secondary.map((account, i) => (
-            <AccountCard key={i} account={account} />
-          ))}
+          <div
+            css={[
+              rcss.position.absolute,
+              rcss.top(0),
+              rcss.left(0),
+              rcss.width("100%"),
+              rcss.height("100%"),
+            ]}
+            ref={accountContainerRef}
+          >
+            <motion.div
+              css={[
+                rcss.flex.column,
+                rcss.colWithGap(8),
+                rcss.px(8),
+                rcss.flex.basis(0),
+              ]}
+              ref={accountsRef}
+              style={{ y }}
+            >
+              {homepage.accounts.secondary.map((account, i) => (
+                <AccountCard key={i} account={account} />
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>

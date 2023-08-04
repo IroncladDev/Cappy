@@ -410,7 +410,7 @@ const DragIcon = () => {
   );
 };
 
-const DragIndicator = () => {
+export const DragIndicator = () => {
   return (
     <div css={rcss.position.relative}>
       <div css={[rcss.flex.column, rcss.colWithGap(4), rcss.align.center]}>

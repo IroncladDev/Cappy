@@ -16,7 +16,9 @@ const Home: NextPage = () => {
       <ScrollSection height={isMobile ? "auto" : "300vh"} stick={!isMobile}>
         {(p) => <ShopPreview percentage={p} />}
       </ScrollSection>
-      <Contacts />
+      <ScrollSection height={isMobile ? "auto" : "200vh"} stick={!isMobile}>
+        {(p) => <Contacts percentage={p} />}
+      </ScrollSection>
     </>
   );
 };
