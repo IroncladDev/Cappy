@@ -9,6 +9,49 @@ import { homepage } from "app/config";
 import useAppState from "app/hooks/useAppState";
 import Intro from "./Intro";
 
+const styles = {
+  outerContainer: [rcss.flex.grow(1), rcss.grid.stack],
+  gunEffectContainer: [
+    rcss.flex.grow(1),
+    rcss.grid.stack,
+    rcss.grid.stackElement,
+    rcss.linearGradient(0, [tokens.backgroundRoot, tokens.backgroundDefault]),
+    {
+      clipPath: "url(#slicer)",
+    },
+  ],
+  stackElement: [
+    rcss.grid.stackElement,
+    rcss.position.relative,
+    rcss.zIndex(0),
+  ],
+  mainHeaderOuterContainer: [
+    rcss.grid.stackElement,
+    rcss.flex.row,
+    rcss.p(16),
+    rcss.center,
+    rcss.zIndex(1),
+    {
+      transition: "background 0.5s linear",
+    },
+  ],
+  mainHeaderContainer: [
+    rcss.flex.row,
+    rcss.maxWidth(tokens.maxBodyWidth),
+    rcss.width("100%"),
+    rcss.align.center,
+  ],
+  headingWrapper: [
+    rcss.flex.growAndShrink(1),
+    rcss.flex.basis(0),
+    rcss.p(16),
+    rcss.flex.column,
+    rcss.align.center,
+  ],
+  headings: [rcss.flex.column, rcss.colWithGap(16), rcss.maxWidth(360)],
+};
+
+// An SVG <clipPath> reference
 function SliceClip({ percentage }: { percentage: MotionValue<number> }) {
   const { isMobile } = useAppState();
 
@@ -48,93 +91,36 @@ export default function IndexHeader({
   const { isMobile } = useAppState();
 
   const onFlash = async () => {
-    console.log("Called");
-    contentBgRef.current.style.background = "rgba(255, 255, 255, 0.5)";
+    if (contentBgRef.current)
+      contentBgRef.current.style.background = "rgba(255, 255, 255, 0.5)";
 
     setTimeout(() => {
-      contentBgRef.current.style.background = "rgba(255, 255, 255, 0)";
+      if (contentBgRef.current)
+        contentBgRef.current.style.background = "rgba(255, 255, 255, 0)";
     }, 100);
   };
 
   return (
     <>
       <SliceClip percentage={percentage} />
-      <div css={[rcss.flex.grow(1), rcss.grid.stack]}>
+      <div css={styles.outerContainer}>
         <Intro percentage={percentage} />
 
-        <div
-          css={[
-            rcss.flex.grow(1),
-            rcss.grid.stack,
-            rcss.grid.stackElement,
-            rcss.linearGradient(0, [
-              tokens.backgroundRoot,
-              tokens.backgroundDefault,
-            ]),
-            {
-              clipPath: "url(#slicer)",
-            },
-          ]}
-        >
+        <div css={styles.gunEffectContainer}>
           {isMobile ? null : (
-            <div
-              css={[
-                rcss.grid.stackElement,
-                rcss.position.relative,
-                rcss.zIndex(0),
-              ]}
-            >
+            <div css={styles.stackElement}>
               <Canvas percentage={percentage} onFlash={onFlash} />
             </div>
           )}
 
-          <div
-            css={[
-              rcss.grid.stackElement,
-              rcss.position.relative,
-              rcss.zIndex(0),
-            ]}
-          >
+          <div css={styles.stackElement}>
             <HeaderFlag percentage={percentage} />
           </div>
 
-          <motion.div
-            css={[
-              rcss.grid.stackElement,
-              rcss.flex.row,
-              rcss.p(16),
-              rcss.center,
-              rcss.zIndex(1),
-              {
-                transition: "background 0.5s linear",
-              },
-            ]}
-            ref={contentBgRef}
-          >
-            <div
-              css={[
-                rcss.flex.row,
-                rcss.maxWidth(tokens.maxBodyWidth),
-                rcss.width("100%"),
-                rcss.align.center,
-              ]}
-            >
-              <div
-                css={[
-                  rcss.flex.growAndShrink(1),
-                  rcss.flex.basis(0),
-                  rcss.p(16),
-                  rcss.flex.column,
-                  rcss.align.center,
-                ]}
-              >
-                <div
-                  css={[
-                    rcss.flex.column,
-                    rcss.colWithGap(16),
-                    rcss.maxWidth(360),
-                  ]}
-                >
+          <motion.div css={styles.mainHeaderOuterContainer} ref={contentBgRef}>
+            <div css={styles.mainHeaderContainer}>
+              <div css={styles.headingWrapper}>
+                <div css={styles.headings}>
                   <div css={[rcss.flex.column, rcss.colWithGap(8)]}>
                     <Text variant="headerBig" multiline>
                       {homepage.header.title.map((t, i) =>

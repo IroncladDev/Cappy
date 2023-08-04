@@ -1,6 +1,6 @@
 hidden = [".config", ".next", ".swc", ".eslintrc.json", ".gitignore", "next-env.d.ts", "next.config.js", "tsconfig.json", "yarn-error.log", "tsconfig.server.json", ".prettierignore", "nodemon.json", "yarn.lock"]
 
-run = "yarn dev"
+run = "yarn start"
 
 [nix]
 channel = "stable-22_11"

@@ -1,17 +1,163 @@
 import { homepage } from "app/config";
 import useAppState from "app/hooks/useAppState";
 import { rcss, tokens } from "app/tokens";
-import {
-  MotionValue,
-  useSpring,
-  useTransform,
-  motion,
-  useMotionValue,
-} from "framer-motion";
+import { MotionValue, useSpring, useTransform, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Square } from "react-feather";
 import Text from "../Text";
 import Button from "../ui/Button";
+
+const styles = {
+  item: [
+    rcss.borderRadius(8),
+    {
+      backgroundImage: `linear-gradient(135deg, ${tokens.foregroundDimmest}, ${tokens.foregroundDefault})`,
+      minWidth: 240,
+      minHeight: 200,
+      border: `solid 2px ${tokens.backgroundHighest}`,
+      overflow: "hidden",
+      position: "relative" as "relative",
+      "&:hover > .preview": {
+        opacity: 1,
+      },
+    },
+  ],
+  itemPreviewBackground: [
+    rcss.borderRadius(8),
+    rcss.flex.column,
+    rcss.flex.grow(1),
+    rcss.width("100%"),
+    rcss.height("100%"),
+    {
+      backgroundSize: "contain",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      filter: "drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.33))",
+      position: "absolute" as "absolute",
+      top: 16,
+      left: 16,
+      width: "calc(100% - 32px)",
+      height: "calc(100% - 32px)",
+    },
+  ],
+  itemPreview: [
+    rcss.flex.row,
+    rcss.center,
+    rcss.p(16),
+    {
+      position: "absolute" as "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background: `rgba(0, 0, 0, 0.75)`,
+      opacity: 0,
+      transition: "0.25s",
+    },
+  ],
+  countryLink: [
+    rcss.rowWithGap(0),
+    rcss.flex.column,
+    rcss.colWithGap(8),
+    {
+      "& > span:first-child": {
+        fontWeight: tokens.fontWeightMedium,
+      },
+    },
+  ],
+  carouselWrapper: [
+    rcss.flex.row,
+    rcss.overflow("hidden"),
+    {
+      flexWrap: "nowrap" as "nowrap",
+      width: "100%",
+      maxWidth: tokens.maxBodyWidth,
+    },
+  ],
+  mobileItem: [
+    rcss.borderRadius(8),
+    rcss.flex.column,
+    {
+      background: tokens.foregroundDimmer,
+      minWidth: 240,
+      borderRight: `solid 2px ${tokens.backgroundHighest}`,
+      overflow: "hidden",
+      border: `solid 1px ${tokens.backgroundHighest}`,
+      "&:last-of-type": {
+        borderRight: "none",
+      },
+    },
+  ],
+  mobileItemPreviewBackground: [
+    rcss.borderRadius(8, 8, 0, 0),
+    rcss.flex.grow(1),
+    {
+      backgroundSize: "contain",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      filter: "drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.33))",
+      minHeight: 200,
+    },
+  ],
+  mobileItemPreview: [
+    rcss.p(8),
+    {
+      background: tokens.backgroundHighest,
+    },
+    rcss.flex.row,
+    rcss.center,
+  ],
+  carouselInner: [
+    rcss.flex.row,
+    rcss.rowWithGap(16),
+    {
+      flexWrap: "nowrap" as "nowrap",
+    },
+  ],
+  carouselItems: [rcss.flex.row, rcss.rowWithGap(16), rcss.position.relative],
+  shopSection: (isMobile: boolean) => [
+    rcss.flex.column,
+    rcss.colWithGap(32),
+    rcss.center,
+    rcss.flex.grow(1),
+    rcss.minHeight("100vh"),
+    rcss.py(isMobile ? 64 : 0),
+    {
+      borderTop: `solid 2px ${tokens.backgroundHighest}`,
+      background: `radial-gradient(
+            circle at 50% 0%,
+            ${tokens.backgroundHighest} 0%,
+            ${tokens.backgroundRoot} 50%,
+            ${tokens.backgroundRoot} 100%
+          )`,
+    },
+  ],
+  mobileItemContainer: [
+    rcss.flex.column,
+    rcss.colWithGap(32),
+    rcss.p(16),
+    rcss.maxWidth("100vw"),
+  ],
+  internationalStoresContainer: [
+    rcss.flex.row,
+    rcss.flex.wrap,
+    rcss.center,
+    {
+      gap: 8,
+    },
+  ],
+  carouselItemContainer: [
+    rcss.height("100%"),
+    rcss.flex.column,
+    rcss.colWithGap(16),
+    rcss.center,
+  ],
+  internationalStoresContainerDesktop: [
+    rcss.flex.column,
+    rcss.colWithGap(16),
+    rcss.align.center,
+  ],
+};
 
 interface Item {
   title: string;
@@ -161,62 +307,15 @@ const items: Array<Item> = [
 const Item = ({ item }: { item: Item }) => {
   return (
     <a target="_blank" href={item.link}>
-      <div
-        css={[
-          rcss.borderRadius(8),
-          {
-            backgroundImage: `linear-gradient(135deg, ${tokens.foregroundDimmest}, ${tokens.foregroundDefault})`,
-            minWidth: 240,
-            minHeight: 200,
-            border: `solid 2px ${tokens.backgroundHighest}`,
-            overflow: "hidden",
-            position: "relative",
-            "&:hover > .preview": {
-              opacity: 1,
-            },
-          },
-        ]}
-      >
+      <div css={styles.item}>
         <div
-          css={[
-            rcss.borderRadius(8),
-            rcss.flex.column,
-            rcss.flex.grow(1),
-            rcss.width("100%"),
-            rcss.height("100%"),
-            {
-              backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.png)`,
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              filter: "drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.33))",
-              position: "absolute",
-              top: 16,
-              left: 16,
-              width: "calc(100% - 32px)",
-              height: "calc(100% - 32px)",
-            },
-          ]}
+          css={styles.itemPreviewBackground}
+          style={{
+            backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.png)`,
+          }}
         />
 
-        <div
-          css={[
-            rcss.flex.row,
-            rcss.center,
-            rcss.p(16),
-            {
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              background: `rgba(0, 0, 0, 0.75)`,
-              opacity: 0,
-              transition: "0.25s",
-            },
-          ]}
-          className="preview"
-        >
+        <div css={styles.itemPreview} className="preview">
           <Text multiline css={{ textAlign: "center" }}>
             {item.title}
           </Text>
@@ -229,48 +328,16 @@ const Item = ({ item }: { item: Item }) => {
 const MobileItem = ({ item }: { item: Item }) => {
   return (
     <a target="_blank" href={item.link} draggable={false}>
-      <div
-        css={[
-          rcss.borderRadius(8),
-          rcss.flex.column,
-          {
-            background: tokens.foregroundDimmer,
-            minWidth: 240,
-            borderRight: `solid 2px ${tokens.backgroundHighest}`,
-            overflow: "hidden",
-            border: `solid 1px ${tokens.backgroundHighest}`,
-            "&:last-of-type": {
-              borderRight: "none",
-            },
-          },
-        ]}
-      >
+      <div css={styles.mobileItem}>
         <div css={[rcss.p(16), rcss.flex.grow(1), rcss.flex.column]}>
           <div
-            css={[
-              rcss.borderRadius(8, 8, 0, 0),
-              rcss.flex.grow(1),
-              {
-                backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.png)`,
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                filter: "drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.33))",
-                minHeight: 200,
-              },
-            ]}
+            css={styles.mobileItemPreviewBackground}
+            style={{
+              backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.png)`,
+            }}
           />
         </div>
-        <div
-          css={[
-            rcss.p(8),
-            {
-              background: tokens.backgroundHighest,
-            },
-            rcss.flex.row,
-            rcss.center,
-          ]}
-        >
+        <div css={styles.mobileItemPreview}>
           <Text multiline css={{ textAlign: "center" }}>
             {item.title}
           </Text>
@@ -293,16 +360,7 @@ const CountryLink = ({
     <Button
       href={href}
       target="_blank"
-      css={[
-        rcss.rowWithGap(0),
-        rcss.flex.column,
-        rcss.colWithGap(8),
-        {
-          "& > span:first-child": {
-            fontWeight: tokens.fontWeightMedium,
-          },
-        },
-      ]}
+      css={styles.countryLink}
       text={title}
       iconRight={<Text variant="headerBig">{flag}</Text>}
     />
@@ -353,41 +411,9 @@ const Carousel = ({
   }, [wrapperRef, contentRef]);
 
   return (
-    <div
-      css={[
-        rcss.flex.row,
-        rcss.overflow("hidden"),
-        {
-          flexWrap: "nowrap",
-          width: "100%",
-          maxWidth: tokens.maxBodyWidth,
-        },
-      ]}
-      ref={wrapperRef}
-      id="shop"
-    >
-      <motion.div
-        css={[
-          rcss.flex.row,
-          rcss.rowWithGap(16),
-          {
-            flexWrap: "nowrap",
-          },
-        ]}
-        style={{ x }}
-        ref={contentRef}
-      >
-        <div
-          css={[
-            rcss.flex.row,
-            rcss.rowWithGap(16),
-            {
-              position: "relative",
-            },
-          ]}
-        >
-          {children(width)}
-        </div>
+    <div css={styles.carouselWrapper} ref={wrapperRef} id="shop">
+      <motion.div css={styles.carouselInner} style={{ x }} ref={contentRef}>
+        <div css={styles.carouselItems}>{children(width)}</div>
       </motion.div>
     </div>
   );
@@ -506,48 +532,13 @@ export default function ShopPreview({
   const { isMobile } = useAppState();
 
   return (
-    <div
-      css={[
-        rcss.flex.column,
-        rcss.colWithGap(32),
-        rcss.center,
-        rcss.flex.grow(1),
-        rcss.minHeight("100vh"),
-        rcss.py(isMobile ? 64 : 0),
-        {
-          borderTop: `solid 2px ${tokens.backgroundHighest}`,
-          background: `radial-gradient(
-            circle at 50% 0%,
-            ${tokens.backgroundHighest} 0%,
-            ${tokens.backgroundRoot} 50%,
-            ${tokens.backgroundRoot} 100%
-          )`,
-        },
-      ]}
-      id="shop"
-    >
+    <div css={styles.shopSection(isMobile)} id="shop">
       <Text variant="headerBig">{homepage.shop.title}</Text>
 
       {isMobile ? (
-        <div
-          css={[
-            rcss.flex.column,
-            rcss.colWithGap(32),
-            rcss.p(16),
-            {
-              maxWidth: "100vw",
-            },
-          ]}
-        >
+        <div css={styles.mobileItemContainer}>
           <DragIndicator />
-          <div
-            css={[
-              rcss.maxWidth("100vw"),
-              {
-                overflowX: "hidden",
-              },
-            ]}
-          >
+          <div css={[rcss.maxWidth("100vw"), rcss.overflowX("hidden")]}>
             <MobileCarousel />
           </div>
 
@@ -565,23 +556,14 @@ export default function ShopPreview({
               iconRight={
                 <ArrowRight color={tokens.foregroundDefault} size={16} />
               }
-              css={{ minWidth: 256 }}
+              css={rcss.minWidth(256)}
               target="_blank"
             />
           </div>
 
           <div css={[rcss.flex.column, rcss.colWithGap(16), rcss.align.center]}>
             <Text variant="subheadDefault">International Stores</Text>
-            <div
-              css={[
-                rcss.flex.row,
-                rcss.flex.wrap,
-                rcss.center,
-                {
-                  gap: 8,
-                },
-              ]}
-            >
+            <div css={styles.internationalStoresContainer}>
               {homepage.shop.international.map((item, i) => (
                 <CountryLink key={i} {...item} />
               ))}
@@ -596,15 +578,7 @@ export default function ShopPreview({
                 {items.slice(0, Math.floor(items.length / 2)).map((item, i) => (
                   <Item key={i} item={item} />
                 ))}
-                <div
-                  css={[
-                    rcss.width(width),
-                    rcss.height("100%"),
-                    rcss.flex.column,
-                    rcss.colWithGap(16),
-                    rcss.center,
-                  ]}
-                >
+                <div css={styles.carouselItemContainer} style={{ width }}>
                   <Text variant="subheadDefault">
                     {homepage.shop.description}
                   </Text>
@@ -614,7 +588,7 @@ export default function ShopPreview({
                     iconRight={
                       <ArrowRight color={tokens.foregroundDefault} size={16} />
                     }
-                    css={{ minWidth: 256 }}
+                    css={rcss.minWidth(256)}
                     target="_blank"
                   />
                 </div>
@@ -626,14 +600,8 @@ export default function ShopPreview({
             {(width) => (
               <>
                 <div
-                  css={[
-                    rcss.flex.column,
-                    rcss.colWithGap(16),
-                    rcss.align.center,
-                    {
-                      width,
-                    },
-                  ]}
+                  css={styles.internationalStoresContainerDesktop}
+                  style={{ width }}
                 >
                   <Text variant="subheadDefault">International Stores</Text>
                   <div css={[rcss.flex.row, rcss.rowWithGap(16)]}>

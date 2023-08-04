@@ -1,13 +1,7 @@
 import { newsletterUrl } from "app/config";
 
 export default function Newsletter() {
-  return <></>;
-}
-
-export function getStaticProps() {
-  return {
-    redirect: {
-      destination: newsletterUrl,
-    },
-  };
+  return <>
+    <meta httpEquiv="refresh" content={"0; url=" + newsletterUrl}/>
+  </>;
 }

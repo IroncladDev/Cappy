@@ -4,7 +4,97 @@ import { homepage } from "app/config";
 import Text from "../Text";
 import Button from "../ui/Button";
 import { Facebook, Instagram, Mail } from "react-feather";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import useAppState from "app/hooks/useAppState";
+import { DragIndicator } from "./ShopPreview";
+
+const styles = {
+  accountCardContainer: (large: boolean) => [
+    rcss.borderRadius(16),
+    rcss.p(16),
+    rcss.minWidth(360),
+    large ? rcss.flex.row : rcss.flex.column,
+    large ? rcss.rowWithGap(16) : rcss.colWithGap(16),
+    large ? rcss.align.center : null,
+    {
+      border: `solid 1px ${tokens.backgroundHigher}`,
+      flex: "1 1 0",
+    },
+  ],
+  accountCardImage: [
+    rcss.borderRadius(16),
+    {
+      border: `solid 1px ${tokens.backgroundHigher}`,
+    },
+  ],
+  accountCardContentWrapper: [
+    rcss.flex.column,
+    rcss.colWithGap(8),
+    {
+      flex: "1 1 0",
+      minWidth: 0,
+    },
+  ],
+  smallCardContainer: [rcss.flex.row, rcss.rowWithGap(16), rcss.align.center],
+  contactSection: [
+    rcss.flex.column,
+    rcss.flex.grow(1),
+    rcss.center,
+    rcss.py(64),
+    {
+      background: `linear-gradient(0deg, ${tokens.backgroundRoot}, ${tokens.backgroundDefault})`,
+      borderTop: `solid 2px ${tokens.backgroundHigher}`,
+    },
+  ],
+  contactMain: (isMobile: boolean) => [
+    isMobile ? rcss.flex.column : rcss.flex.row,
+    isMobile ? rcss.colWithGap(16) : rcss.rowWithGap(16),
+    rcss.p(16),
+    rcss.center,
+    rcss.maxWidth(tokens.maxBodyWidth),
+    rcss.width("100vw"),
+  ],
+  contactMainInner: (isMobile: boolean) => [
+    rcss.flex.column,
+    rcss.colWithGap(32),
+    isMobile
+      ? undefined
+      : {
+          flex: "1 1 0",
+          minWidth: 0,
+        },
+  ],
+  buttonContainer: [
+    rcss.flex.row,
+    rcss.rowWithGap(16),
+    rcss.width("100%"),
+    {
+      "& a": {
+        flexGrow: 1,
+        display: "flex",
+      },
+    },
+  ],
+  accountsContainer: (isMobile: boolean) => [
+    rcss.flex.column,
+    rcss.position.relative,
+    isMobile ? undefined : rcss.height("100%"),
+    rcss.minWidth(0),
+    rcss.maxWidth("100vw"),
+    isMobile
+      ? undefined
+      : {
+          flex: "1 1 0",
+        },
+  ],
+  accounts: [
+    rcss.position.absolute,
+    rcss.top(0),
+    rcss.left(0),
+    rcss.width("100%"),
+    rcss.height("100%"),
+  ],
+};
 
 function AccountCard({
   account,
@@ -20,20 +110,9 @@ function AccountCard({
   large?: boolean;
 }) {
   return (
-    <a target="_blank" href={account.url}>
+    <a target="_blank" href={account.url} draggable={false}>
       <motion.div
-        css={[
-          rcss.borderRadius(16),
-          rcss.p(16),
-          large ? rcss.flex.row : rcss.flex.column,
-          large ? rcss.rowWithGap(16) : rcss.colWithGap(16),
-          large ? rcss.align.center : null,
-          {
-            border: `solid 1px ${tokens.backgroundHigher}`,
-            flex: "1 1 0",
-            minWidth: 0,
-          },
-        ]}
+        css={styles.accountCardContainer(Boolean(large))}
         initial={{
           background: tokens.backgroundRoot,
         }}
@@ -47,27 +126,14 @@ function AccountCard({
         {large ? (
           <>
             <img
-              width={large ? 128 : 64}
-              height={large ? 128 : 64}
+              width="128"
+              height="128"
               src={account.image}
-              css={[
-                rcss.borderRadius(16),
-                {
-                  border: `solid 1px ${tokens.backgroundHigher}`,
-                },
-              ]}
+              css={styles.accountCardImage}
+              alt={account.username}
             />
 
-            <div
-              css={[
-                rcss.flex.column,
-                rcss.colWithGap(8),
-                {
-                  flex: "1 1 0",
-                  minWidth: 0,
-                },
-              ]}
-            >
+            <div css={styles.accountCardContentWrapper}>
               <Text variant={large ? "subheadBig" : "subheadDefault"} multiline>
                 {account.displayName}
               </Text>
@@ -79,29 +145,16 @@ function AccountCard({
             </div>
           </>
         ) : (
-          <div css={[rcss.flex.row, rcss.rowWithGap(16), rcss.align.center]}>
+          <div css={styles.smallCardContainer}>
             <img
-              width={large ? 128 : 64}
-              height={large ? 128 : 64}
+              width="64"
+              height="64"
               src={account.image}
-              css={[
-                rcss.borderRadius(16),
-                {
-                  border: `solid 1px ${tokens.backgroundHigher}`,
-                },
-              ]}
+              css={styles.accountCardImage}
+              alt={account.username}
             />
 
-            <div
-              css={[
-                rcss.flex.column,
-                rcss.colWithGap(8),
-                {
-                  flex: "1 1 0",
-                  minWidth: 0,
-                },
-              ]}
-            >
+            <div css={styles.accountCardContentWrapper}>
               <Text variant={large ? "subheadBig" : "subheadDefault"} multiline>
                 {account.displayName}
               </Text>
@@ -120,11 +173,45 @@ function AccountCard({
   );
 }
 
+const MobileCarousel = () => {
+  const itemsRef = useRef<HTMLDivElement>(null);
+
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    if (itemsRef.current) {
+      setContainerWidth(
+        itemsRef.current.scrollWidth - itemsRef.current.clientWidth
+      );
+    }
+  }, [itemsRef]);
+
+  return (
+    <div css={[rcss.width("100%"), rcss.overflowX("hidden")]}>
+      <motion.div
+        css={[rcss.flex.row, rcss.rowWithGap(16), rcss.px(16)]}
+        drag="x"
+        dragConstraints={{
+          left: -containerWidth,
+          right: 0,
+        }}
+        ref={itemsRef}
+      >
+        {homepage.accounts.secondary.map((account, i) => (
+          <AccountCard account={account} key={i} />
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
 export default function Contacts({
   percentage,
 }: {
   percentage: MotionValue<number>;
 }) {
+  const { isMobile } = useAppState();
+
   const accountsRef = useRef<HTMLDivElement>(null);
   const accountContainerRef = useRef<HTMLDivElement>(null);
 
@@ -145,38 +232,9 @@ export default function Contacts({
   });
 
   return (
-    <div
-      css={[
-        rcss.flex.column,
-        rcss.flex.grow(1),
-        rcss.center,
-        rcss.px(16),
-        {
-          background: `linear-gradient(0deg, ${tokens.backgroundRoot}, ${tokens.backgroundDefault})`,
-          borderTop: `solid 2px ${tokens.backgroundHigher}`,
-        },
-      ]}
-      id="contact"
-    >
-      <div
-        css={[
-          rcss.flex.row,
-          rcss.rowWithGap(16),
-          rcss.center,
-          rcss.maxWidth(tokens.maxBodyWidth),
-          rcss.width("100vw"),
-        ]}
-      >
-        <div
-          css={[
-            rcss.flex.column,
-            rcss.colWithGap(32),
-            {
-              flex: "1 1 0",
-              minWidth: 0,
-            },
-          ]}
-        >
+    <div css={styles.contactSection} id="contact">
+      <div css={styles.contactMain(isMobile)}>
+        <div css={styles.contactMainInner(isMobile)}>
           <div css={[rcss.flex.column, rcss.colWithGap(16)]}>
             <Text variant="headerDefault">{homepage.contacts.header}</Text>
             <Text color="dimmer" multiline>
@@ -186,19 +244,7 @@ export default function Contacts({
 
           <div css={[rcss.flex.column, rcss.colWithGap(16)]}>
             <AccountCard large account={homepage.accounts.main} />
-            <div
-              css={[
-                rcss.flex.row,
-                rcss.rowWithGap(16),
-                rcss.width("100%"),
-                {
-                  "& a": {
-                    flexGrow: 1,
-                    display: "flex",
-                  },
-                },
-              ]}
-            >
+            <div css={styles.buttonContainer}>
               <Button
                 iconLeft={
                   <Facebook color={tokens.foregroundDefault} size={16} />
@@ -225,42 +271,25 @@ export default function Contacts({
           </div>
         </div>
 
-        <div
-          css={[
-            rcss.flex.column,
-            rcss.position.relative,
-            rcss.height("100%"),
-            rcss.minWidth(0),
-            {
-              flex: "1 1 0",
-            },
-          ]}
-        >
-          <div
-            css={[
-              rcss.position.absolute,
-              rcss.top(0),
-              rcss.left(0),
-              rcss.width("100%"),
-              rcss.height("100%"),
-            ]}
-            ref={accountContainerRef}
-          >
-            <motion.div
-              css={[
-                rcss.flex.column,
-                rcss.colWithGap(8),
-                rcss.px(8),
-                rcss.flex.basis(0),
-              ]}
-              ref={accountsRef}
-              style={{ y }}
-            >
-              {homepage.accounts.secondary.map((account, i) => (
-                <AccountCard key={i} account={account} />
-              ))}
-            </motion.div>
+        <div css={styles.accountsContainer(isMobile)}>
+          <div css={{ marginBottom: 24 }}>
+            {isMobile ? <DragIndicator /> : null}
           </div>
+          {isMobile ? (
+            <MobileCarousel />
+          ) : (
+            <div css={styles.accounts} ref={accountContainerRef}>
+              <motion.div
+                css={[rcss.flex.column, rcss.colWithGap(8), rcss.flex.basis(0)]}
+                ref={accountsRef}
+                style={{ y }}
+              >
+                {homepage.accounts.secondary.map((account, i) => (
+                  <AccountCard key={i} account={account} />
+                ))}
+              </motion.div>
+            </div>
+          )}
         </div>
       </div>
     </div>

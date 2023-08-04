@@ -142,6 +142,7 @@ export default function Intro({
               opacity: preScale,
               scale: preScale,
             }}
+            alt="Logo"
           />
 
           <div css={[rcss.flex.column, rcss.colWithGap(8), rcss.center]}>
@@ -165,12 +166,14 @@ export default function Intro({
         </div>
 
         <div css={[rcss.flex.column, rcss.colWithGap(16), rcss.maxWidth(480)]}>
-          <Text
-            variant="headerDefault"
-            style={{ translateX: titleX, opacity: preScale }}
-          >
-            {homepage.intro.title}
-          </Text>
+          <div css={[rcss.flex.row]}>
+            <Text
+              variant="headerDefault"
+              style={{ translateX: titleX, opacity: preScale }}
+            >
+              {homepage.intro.title}
+            </Text>
+          </div>
           <motion.div
             css={[rcss.flex.column, rcss.colWithGap(8)]}
             style={{

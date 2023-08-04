@@ -4,7 +4,6 @@ import { SSRProvider } from "@react-aria/ssr";
 import { useEffect, useState } from "react";
 import { AppContext } from "app/state";
 import HeadMetadata from "app/components/HeadMetadata";
-import { useMotionValue } from "framer-motion";
 import Nav from "app/components/Nav";
 import { useRouter } from "next/router";
 
@@ -13,13 +12,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
 
-  const windowWidth = useMotionValue(0);
-  const windowHeight = useMotionValue(0);
-
   useEffect(() => {
     const handler = () => {
-      windowWidth.set(window.innerWidth);
-      windowHeight.set(window.innerHeight);
       if (window.innerWidth < 768) {
         setIsMobile(true);
       } else {
@@ -50,8 +44,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <AppContext.Provider
         value={{
           isMobile,
-          windowWidth,
-          windowHeight,
         }}
       >
         <HeadMetadata />

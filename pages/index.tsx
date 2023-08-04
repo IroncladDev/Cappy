@@ -4,6 +4,7 @@ import useAppState from "app/hooks/useAppState";
 import IndexHeader from "app/components/index/Header";
 import ShopPreview from "app/components/index/ShopPreview";
 import Contacts from "app/components/index/Contacts";
+import Footer from "app/components/Footer";
 
 const Home: NextPage = () => {
   const { isMobile } = useAppState();
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
       <ScrollSection height={isMobile ? "auto" : "200vh"} stick={!isMobile}>
         {(p) => <Contacts percentage={p} />}
       </ScrollSection>
+      <Footer />
     </>
   );
 };

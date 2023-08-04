@@ -182,25 +182,15 @@ export default function Nav() {
             text="Newsletter"
             small
             level={1}
-            iconLeft={
-              <Mail
-                size={16}
-                color={tokens.foregroundDefault}
-                href="/newsletter"
-              />
-            }
+            href="/newsletter"
+            iconLeft={<Mail size={16} color={tokens.foregroundDefault} />}
           />
           <Button
             text="Follow on X / Twitter"
             small
             level={1}
-            iconLeft={
-              <Twitter
-                size={16}
-                color={tokens.foregroundDefault}
-                href="https://twitter.com/LibertyCappy"
-              />
-            }
+            href="https://twitter.com/LibertyCappy"
+            iconLeft={<Twitter size={16} color={tokens.foregroundDefault} />}
           />
           <Text color="dimmest" variant="small">
             &copy; Declaration of Memes{" "}

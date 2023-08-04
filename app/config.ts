@@ -108,3 +108,24 @@ export const homepage = {
 };
 
 export const newsletterUrl = "https://forms.gle/ay7Q6Vx7UcPcNCh97";
+
+export const footer = {
+  siteLinks: [
+    ["Home", "/"],
+    ["About", "/#about"],
+    ["Shop", "/#shop"],
+    ["Contact", "/#contact"],
+    ["Newsletter", "/newsletter"],
+  ],
+  socialLinks: [
+    ["@GigaBasedTrad", "https://twitter.com/GigaBasedTrad"],
+    ["@SpillTheMemes", "https://twitter.com/SpillTheMemes"],
+    ["@LPTubularCaucus", "https://twitter.com/LPTubularCaucus"],
+    ["@ChristianPunsOG", "https://twitter.com/ChristianPunsOG"],
+    ["@CappyLibertad", "https://twitter.com/CappyLibertad"],
+  ],
+  header: "Become Ungovernable",
+  description: "Changing the world one meme at a time",
+};
+
+export const metaDescription = "I'm LibertyCappy, a Memer and influencer armed with humor & reason. I create satirical libertarian memes to fight against tyranny.";
