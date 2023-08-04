@@ -24,10 +24,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     handler();
 
     window.addEventListener("resize", handler);
-
-    return () => {
-      window.removeEventListener("resize", handler);
-    };
   }, []);
 
   useEffect(() => {

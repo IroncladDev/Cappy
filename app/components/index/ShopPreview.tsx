@@ -311,7 +311,7 @@ const Item = ({ item }: { item: Item }) => {
         <div
           css={styles.itemPreviewBackground}
           style={{
-            backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.png)`,
+            backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.webp)`,
           }}
         />
 
@@ -333,7 +333,7 @@ const MobileItem = ({ item }: { item: Item }) => {
           <div
             css={styles.mobileItemPreviewBackground}
             style={{
-              backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.png)`,
+              backgroundImage: `url(/images/merch/${item.image}_clipdrop-background-removal.webp)`,
             }}
           />
         </div>

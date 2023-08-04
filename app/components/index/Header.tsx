@@ -63,18 +63,24 @@ function SliceClip({ percentage }: { percentage: MotionValue<number> }) {
     mass: 0.1,
   });
 
-  const y = useTransform(smoothPercentage, (v) => constrain(0.5 + v / 2, 0, 1));
+  const points = useTransform(smoothPercentage, (v) => {
+    const u = constrain(0.5 + v / 2, 0, 1);
+    const u2 = constrain(0.5 - v / 2, 0, 1);
 
-  const height = useTransform(smoothPercentage, (v) =>
-    constrain(0.5 - v / 2, 0, 1)
-  );
+    return `0 0 1 0 1 ${u2} 0 ${u2} 0 ${u} 1 ${u} 1 1 0 1`;
+  });
 
   return (
     <svg width="0" height="0">
       <defs>
         <clipPath id="slicer" clipPathUnits="objectBoundingBox">
-          <motion.rect x="0" y="0" width="1" style={{ height }} />
-          <motion.rect x="0" width="1" style={{ height, y }} />
+          <motion.polygon
+            points="0 0 1 0 1 0.5 0 0.5 0 0.5 100 0.5 1 1 0 1"
+            style={{
+              //@ts-ignore
+              points,
+            }}
+          />
         </clipPath>
       </defs>
     </svg>

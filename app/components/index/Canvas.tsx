@@ -1,4 +1,4 @@
-import { constrain, pOffset } from "app/lib/algs";
+import { constrain } from "app/lib/algs";
 import {
   MotionValue,
   useMotionValueEvent,
@@ -85,10 +85,6 @@ export default function Canvas({
     }
   };
 
-  useEffect(() => {
-    handleMotionValueChange(0);
-  }, [canvasRef, gunBottomRef, gunTopRef]);
-
   useMotionValueEvent(smoothPercentage, "change", handleMotionValueChange);
 
   return (
@@ -114,12 +110,16 @@ export default function Canvas({
         ref={gunTopRef}
         src="/images/pistol-slider.png"
         alt="Pistol Slider"
+        width="0"
+        height="0"
         style={{ display: "none" }}
       />
       <img
         ref={gunBottomRef}
         src="/images/pistol-handle.png"
         alt="Pistol Handle"
+        width="0"
+        height="0"
         style={{ display: "none" }}
       />
     </>

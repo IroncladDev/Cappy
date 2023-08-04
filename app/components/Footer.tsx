@@ -63,19 +63,15 @@ const styles = {
       borderTop: `solid 1px ${tokens.outlineDimmest}`,
       alignSelf: isMobile ? "center" : undefined,
     },
-  ]
-}
+  ],
+};
 
 export default function Footer() {
   const { isMobile } = useAppState();
 
   return (
-    <footer
-      css={styles.footer}
-    >
-      <div
-        css={styles.footerContentWrapper}
-      >
+    <footer css={styles.footer}>
+      <div css={styles.footerContentWrapper}>
         <div
           css={
             isMobile
@@ -83,9 +79,7 @@ export default function Footer() {
               : [rcss.flex.row, rcss.rowWithGap(16)]
           }
         >
-          <div
-            css={styles.footerMeta(isMobile)}
-          >
+          <div css={styles.footerMeta(isMobile)}>
             <Text variant="subheadDefault">{footer.header}</Text>
             <Text color="dimmer" multiline>
               {footer.description}
@@ -93,9 +87,7 @@ export default function Footer() {
 
             {isMobile ? null : <div css={rcss.flex.grow(1)} />}
 
-            <div
-              css={styles.ctaButtonWrapper}
-            >
+            <div css={styles.ctaButtonWrapper}>
               <Button
                 text="Subscribe"
                 level={2}
@@ -115,12 +107,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div
-            css={styles.footerLinksContainer(isMobile)}
-          >
-            <div
-              css={styles.footerWebLinks(isMobile)}
-            >
+          <div css={styles.footerLinksContainer(isMobile)}>
+            <div css={styles.footerWebLinks(isMobile)}>
               {footer.siteLinks.map(([title, url], i) => (
                 <Link key={i} href={url} passHref>
                   <a>
@@ -142,9 +130,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div
-          css={styles.footerEnd(isMobile)}
-        >
+        <div css={styles.footerEnd(isMobile)}>
           <Text color="dimmer">
             &copy; Declaration of Memes{" "}
             {new Date().getFullYear() === 2023

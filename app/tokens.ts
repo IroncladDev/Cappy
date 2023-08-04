@@ -79,7 +79,6 @@ export const rcss = {
   pr: (space: Space) => css({ paddingRight: toSpace(space) }),
 
   position: {
-    static: css({ position: "static" }),
     relative: css({ position: "relative" }),
     absolute: css({ position: "absolute" }),
     fixed: css({ position: "fixed" }),
@@ -89,24 +88,11 @@ export const rcss = {
   flex: {
     row: css({ display: "flex", flexDirection: "row" }),
     column: css({ display: "flex", flexDirection: "column" }),
-    rowReverse: css({ display: "flex", flexDirection: "row-reverse" }),
-    columnReverse: css({ display: "flex", flexDirection: "column-reverse" }),
     grow: (flexGrow: number) => css({ flexGrow }),
     growAndShrink: (flex: number) => css({ flexGrow: flex, flexShrink: flex }),
     basis: (basis: Space) => css({ flexBasis: toSpace(basis) }),
     shrink: (flex: number) => css({ flexShrink: flex }),
     wrap: css({ flexWrap: "wrap" }),
-    wrapReverse: css({ flexWrap: "wrap-reverse" }),
-  },
-
-  display: {
-    none: css({ display: "none" }),
-    block: css({ display: "block" }),
-    inline: css({ display: "inline" }),
-    inlineBlock: css({ display: "inline-block" }),
-    flex: css({ display: "flex" }),
-    inlineFlex: css({ display: "inline-flex" }),
-    grid: css({ display: "grid" }),
   },
 
   center: css({ alignItems: "center", justifyContent: "center" }),
@@ -114,18 +100,13 @@ export const rcss = {
   align: {
     start: css({ alignItems: "flex-start" }),
     center: css({ alignItems: "center" }),
-    stretch: css({ alignItems: "stretch" }),
-    baseline: css({ alignItems: "baseline" }),
     end: css({ alignItems: "flex-end" }),
   },
 
   justify: {
-    start: css({ justifyContent: "flex-start" }),
     center: css({ justifyContent: "center" }),
     end: css({ justifyContent: "flex-end" }),
     spaceBetween: css({ justifyContent: "space-between" }),
-    spaceAround: css({ justifyContent: "space-around" }),
-    spaceEvenly: css({ justifyContent: "space-evenly" }),
   },
 
   rowWithGap: (space: Space) =>
@@ -142,20 +123,6 @@ export const rcss = {
       "& > *:last-child": { marginBottom: 0 },
     }),
 
-  rowReverseWithGap: (space: Space) =>
-    css({
-      flexDirection: "row-reverse",
-      "& > *": { marginRight: toSpace(space) },
-      "& > *:first-child": { marginRight: 0 },
-    }),
-
-  colReverseWithGap: (space: Space) =>
-    css({
-      flexDirection: "column-reverse",
-      "& > *": { marginBottom: toSpace(space) },
-      "& > *:first-child": { marginBottom: 0 },
-    }),
-
   borderRadius: (
     ...radius:
       | [BorderRadius]
@@ -166,30 +133,8 @@ export const rcss = {
     });
   },
 
-  fontWeight: {
-    normal: css({ fontWeight: "var(--font-weight-regular)" }),
-    medium: css({ fontWeight: "var(--font-weight-medium)" }),
-    bold: css({ fontWeight: "var(--font-weight-bold)" }),
-  },
-
-  fontSize: (fontSize: number | string) => css({ fontSize }),
-
-  textAlign: {
-    left: css({ textAlign: "left" }),
-    center: css({ textAlign: "center" }),
-    right: css({ textAlign: "right" }),
-  },
-
-  cursor: {
-    pointer: css({ cursor: "pointer" }),
-    default: css({ cursor: "default" }),
-    progress: css({ cursor: "progress" }),
-    auto: css({ cursor: "auto" }),
-  },
-
   overflow: (overflow: CSSProperties["overflow"]) => css({ overflow }),
   overflowX: (overflowX: CSSProperties["overflowX"]) => css({ overflowX }),
-  overflowY: (overflowY: CSSProperties["overflowY"]) => css({ overflowY }),
 
   zIndex: (zIndex: number) => css({ zIndex }),
 
@@ -230,11 +175,6 @@ export const rcss = {
       height: "100%",
     }),
   },
-
-  bg: (background: string) =>
-    css({
-      background,
-    }),
 };
 
 export const tokens = baseTokens;

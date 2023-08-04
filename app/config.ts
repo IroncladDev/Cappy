@@ -63,7 +63,7 @@ export const homepage = {
     main: {
       username: "LibertyCappy",
       displayName: "Declaration of Memes",
-      image: "/images/accounts/libertycappy.jpeg",
+      image: "/images/accounts/libertycappy-128.webp",
       bio: "Liberty Maximalist 🖤💛 Pro: Liberty, Free Markets, Family, Homesteading, Charity, Homeschool, Satire, Arms, Natural Rights -Anti: Tyranny, War, Taxes, Violence",
       url: "https://twitter.com/LibertyCappy",
     },
@@ -72,35 +72,35 @@ export const homepage = {
         username: "GigaBasedTrad",
         displayName: "Giga Based Trad",
         bio: "Unapologetically Christian and Based. Liberty Maximalist. Pro: God, Family, Homesteading, Scripture, Memes, Homeschooling, Self-Sufficiency, Hunting, Community.",
-        image: "/images/accounts/gigabasedtrad.jpeg",
+        image: "/images/accounts/gigabasedtrad-64.webp",
         url: "https://twitter.com/GigaBasedTrad",
       },
       {
         username: "SpillTheMemes",
         displayName: "Spill The Memes",
         bio: "This is a place to enjoy humor without all the constant politics. Come here and disconnect and have a good laugh!",
-        image: "/images/accounts/spillthememes.jpeg",
+        image: "/images/accounts/spillthememes-64.webp",
         url: "https://twitter.com/SpillTheMemes",
       },
       {
         username: "LPTubularCaucus",
         displayName: "Libertarian Party Tubular Caucus",
         bio: "Radical? No. Gnarly? No. We're Tubular. 😎 - Follow me for hilarious political satire. 💪",
-        image: "/images/accounts/lptubularcaucus.jpeg",
+        image: "/images/accounts/lptubularcaucus-64.webp",
         url: "https://twitter.com/LPTubularCaucus",
       },
       {
         username: "ChristianPunsOG",
         displayName: "Christian Memes and Puns",
         bio: "Christian. Puns. Memes. Satire. Family. Church. Nerd. Life. Liberty. Community. Homeschooling. Homesteading. Freedom. Joy. Scripture.",
-        image: "/images/accounts/christianpuns.jpeg",
+        image: "/images/accounts/christianpuns-64.webp",
         url: "https://twitter.com/ChristianPunsOG",
       },
       {
         username: "CappyLibertad",
         displayName: "Cappy el Carpincho Capitalista",
         bio: "El administrador de @LibertyCappy - De Mexico 🇲🇽 con familia en España 🇪🇸 - Inmigrante a Texas 🤠 - Libertad absoluta 💛🖤",
-        image: "/images/accounts/cappylibertad.jpeg",
+        image: "/images/accounts/cappylibertad-64.webp",
         url: "https://twitter.com/CappyLibertad",
       },
     ],
@@ -128,4 +128,5 @@ export const footer = {
   description: "Changing the world one meme at a time",
 };
 
-export const metaDescription = "I'm LibertyCappy, a Memer and influencer armed with humor & reason. I create satirical libertarian memes to fight against tyranny.";
+export const metaDescription =
+  "I'm LibertyCappy, a Memer and influencer armed with humor & reason. I create satirical libertarian memes to fight against tyranny.";

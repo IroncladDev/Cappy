@@ -155,6 +155,7 @@ export default function Nav() {
         ]}
         variants={animations.nav}
         animate={open ? "open" : "closed"}
+        initial={false}
       >
         {links.map(({ text, href, icon }, i) => (
           <NavItem
@@ -272,6 +273,7 @@ export default function Nav() {
                     width: 16,
                   }
             }
+            initial={false}
           />
         </motion.div>
       </button>
