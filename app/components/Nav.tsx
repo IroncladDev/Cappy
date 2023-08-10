@@ -40,7 +40,7 @@ const styles = {
   nav: [
     rcss.flex.column,
     rcss.p(16),
-    rcss.pt(64),
+    rcss.pt(48),
     {
       background: `linear-gradient(135deg, ${tokens.backgroundRoot}, ${tokens.backgroundDefault})`,
       borderRight: `solid 2px ${tokens.backgroundHigher}`,
@@ -233,6 +233,19 @@ export default function Nav() {
         animate={open ? "open" : "closed"}
         initial={false}
       >
+        <a
+          href="#"
+          css={[
+            rcss.flex.row,
+            rcss.rowWithGap(8),
+            rcss.align.center,
+            rcss.p(8),
+          ]}
+        >
+          <img src="/logo/64-round.webp" width={24} height={24} />
+          <Text variant="subheadDefault">Liberty Cappy</Text>
+        </a>
+
         {links.map(({ text, href, icon }, i) => (
           <NavItem
             key={i}
@@ -261,7 +274,7 @@ export default function Nav() {
             iconLeft={<Twitter size={16} color={tokens.foregroundDefault} />}
           />
           <Text color="dimmest" variant="small">
-            &copy; Declaration of Memes{" "}
+            &copy; Liberty Cappy{" "}
             {new Date().getFullYear() === 2023
               ? 2023
               : `${2023} - ${new Date().getFullYear()}`}

@@ -4,8 +4,8 @@ import Head from "next/head";
 export default function HeadMetadata() {
   return (
     <Head>
-      <title>Declaration of Memes</title>
-      <meta property="og:title" content="Declaration of Memes" />
+      <title>Liberty Cappy</title>
+      <meta property="og:title" content="Liberty Cappy" />
       <meta name="description" content={metaDescription} />
       <meta property="og:description" content={metaDescription} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />

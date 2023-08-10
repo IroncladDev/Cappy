@@ -133,7 +133,7 @@ export default function Footer() {
 
         <div css={styles.footerEnd(isMobile)}>
           <Text color="dimmer">
-            &copy; Declaration of Memes{" "}
+            &copy; Liberty Cappy{" "}
             {new Date().getFullYear() === 2023
               ? 2023
               : `${2023} - ${new Date().getFullYear()}`}
