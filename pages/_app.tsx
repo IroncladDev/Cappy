@@ -4,8 +4,8 @@ import { SSRProvider } from "@react-aria/ssr";
 import { useEffect, useState } from "react";
 import { AppContext } from "app/state";
 import HeadMetadata from "app/components/HeadMetadata";
-import Nav from "app/components/Nav";
 import { useRouter } from "next/router";
+import NavHeader from "app/components/NavHeader";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isMobile, setIsMobile] = useState(false);
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <HeadMetadata />
         <Component {...pageProps} />
-        <Nav />
+        <NavHeader />
       </AppContext.Provider>
     </SSRProvider>
   );

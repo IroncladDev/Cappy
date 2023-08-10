@@ -57,6 +57,8 @@ const styles = {
   contactMainInner: (isMobile: boolean) => [
     rcss.flex.column,
     rcss.colWithGap(32),
+    rcss.p(16),
+    rcss.maxWidth("100vw"),
     isMobile
       ? undefined
       : {
@@ -236,7 +238,9 @@ export default function Contacts({
       <div css={styles.contactMain(isMobile)}>
         <div css={styles.contactMainInner(isMobile)}>
           <div css={[rcss.flex.column, rcss.colWithGap(16)]}>
-            <Text variant="headerDefault">{homepage.contacts.header}</Text>
+            <Text variant="headerDefault" multiline>
+              {homepage.contacts.header}
+            </Text>
             <Text color="dimmer" multiline>
               {homepage.contacts.description}
             </Text>

@@ -101,6 +101,7 @@ export default function Footer() {
                 iconLeft={
                   <Twitter color={tokens.foregroundDefault} size={16} />
                 }
+                iconRight={<Text>𝕏</Text>}
                 href="https://twitter.com/LibertyCappy"
                 css={rcss.flex.grow(1)}
               />
@@ -137,12 +138,6 @@ export default function Footer() {
               ? 2023
               : `${2023} - ${new Date().getFullYear()}`}
           </Text>
-
-          <div css={[rcss.flex.row, rcss.rowWithGap(8)]}>
-            <a href="https://connerow.dev" target="_blank" rel="noreferrer">
-              <Text color="dimmest">Design & Development by IroncladDev</Text>
-            </a>
-          </div>
         </div>
       </div>
     </footer>

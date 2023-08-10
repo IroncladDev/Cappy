@@ -1,6 +1,6 @@
 hidden = [".config", ".next", ".swc", ".eslintrc.json", ".gitignore", "next-env.d.ts", "next.config.js", "tsconfig.json", "yarn-error.log", "tsconfig.server.json", ".prettierignore", "nodemon.json", "yarn.lock"]
 
-run = "yarn start"
+run = "yarn dev"
 
 [nix]
 channel = "stable-22_11"
@@ -17,8 +17,8 @@ pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
   start = [ "typescript-language-server", "--stdio" ]
 
 [deployment]
-build = ["sh", "-c", "npm run build"]
-run = ["sh", "-c", "npm run start"]
+build = ["sh", "-c", "yarn build"]
+run = ["sh", "-c", "yarn start"]
 
 [gitHubImport]
 requiredFiles = [".replit", "replit.nix", ".config"]

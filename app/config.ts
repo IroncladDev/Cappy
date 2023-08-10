@@ -14,20 +14,20 @@ export const homepage = {
     ],
     subtitle: "Freedom",
     description:
-      "I'm LibertyCappy, a Memer and influencer armed with humor & reason. I create satirical libertarian memes to fight against tyranny.",
+      "I'm Liberty Cappy, a memer and content creator armed with humor & reason. I create satirical liberty memes to fight against tyranny.",
   },
   intro: {
     title: "Howdy 👋",
     paragraphs: [
-      "I'm LibertyCappy, etc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "Sed eu mauris eu nisi mollis ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;",
-      "Nulla vitae erat eget nisl lobortis tincidunt. Curabitur ac lectus quis, ultrices nisi.",
+      "I'm Liberty Cappy – armed with humor and reason, I craft satirical liberty memes to take a stand against tyranny.",
+      "As a Liberty Maximalist, I champion freedom, free markets, and individual rights while opposing tyranny, war, taxes, and violence.",
+      "Join me in the battle for liberty by signing up for my monthly newsletter and following me on X / Twitter!",
     ],
   },
   shop: {
     title: "Based Merch",
     storeButton: {
-      text: "View All",
+      text: "🇺🇸 View All",
       href: "https://www.amazon.com/s/ref=bl_sl_s_ap_web_7141123011?ie=UTF8&node=7141123011&field-brandtextbin=Liberty+Swag",
     },
     description: "Check out my store on Amazon for more!",
@@ -38,14 +38,24 @@ export const homepage = {
         flag: "🇪🇸",
       },
       {
+        title: "English",
+        href: "https://x.com",
+        flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+      },
+      {
+        title: "Français",
+        flag: "🇫🇷",
+        href: "https://x.com",
+      },
+      {
+        title: "Italiano",
+        flag: "🇮🇹",
+        href: "https://x.com",
+      },
+      {
         title: "Deutsch",
         href: "https://x.com",
         flag: "🇩🇪",
-      },
-      {
-        title: "中文",
-        href: "https://x.com",
-        flag: "🇨🇳",
       },
       {
         title: "日本語",
@@ -129,4 +139,4 @@ export const footer = {
 };
 
 export const metaDescription =
-  "I'm LibertyCappy, a Memer and influencer armed with humor & reason. I create satirical libertarian memes to fight against tyranny.";
+  "I'm Liberty Cappy, a memer and content creator armed with humor & reason. I create satirical liberty memes to fight against tyranny.";

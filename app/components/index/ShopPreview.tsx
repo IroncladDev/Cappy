@@ -60,7 +60,7 @@ const styles = {
     rcss.flex.column,
     rcss.colWithGap(8),
     {
-      "& > span:first-child": {
+      "& > span:first-of-type": {
         fontWeight: tokens.fontWeightMedium,
       },
     },
