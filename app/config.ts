@@ -84,6 +84,10 @@ export const homepage = {
         bio: "Unapologetically Christian and Based. Liberty Maximalist. Pro: God, Family, Homesteading, Scripture, Memes, Homeschooling, Self-Sufficiency, Hunting, Community.",
         image: "/images/accounts/gigabasedtrad-64.webp",
         url: "https://twitter.com/GigaBasedTrad",
+        // socials: {
+        //   facebook: "https://facebook.com",
+        //   instagram: "https://instagram.com",
+        // },
       },
       {
         username: "SpillTheMemes",
@@ -117,7 +121,7 @@ export const homepage = {
   },
 };
 
-export const newsletterUrl = "https://forms.gle/ay7Q6Vx7UcPcNCh97";
+export const newsletterUrl = "https://forms.gle/2cEKoyjag5A44sjr7";
 
 export const footer = {
   siteLinks: [
@@ -126,6 +130,7 @@ export const footer = {
     ["Shop", "/#shop"],
     ["Contact", "/#contact"],
     ["Newsletter", "/newsletter"],
+    ["Privacy Policy", "/privacy"],
   ],
   socialLinks: [
     ["@GigaBasedTrad", "https://twitter.com/GigaBasedTrad"],

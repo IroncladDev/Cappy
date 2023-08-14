@@ -3,7 +3,7 @@ import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { homepage } from "app/config";
 import Text from "../Text";
 import Button from "../ui/Button";
-import { Facebook, Instagram, Mail } from "react-feather";
+import { Facebook, Instagram, Mail, Twitter } from "react-feather";
 import { useEffect, useRef, useState } from "react";
 import useAppState from "app/hooks/useAppState";
 import { DragIndicator } from "./ShopPreview";
@@ -108,19 +108,31 @@ function AccountCard({
     bio: string;
     image: string;
     url: string;
+    socials?: {
+      facebook?: string;
+      instagram?: string;
+    };
   };
   large?: boolean;
 }) {
   return (
-    <a target="_blank" href={account.url} draggable={false}>
+    <a
+      target="_blank"
+      href={account?.socials ? undefined : account.url}
+      draggable={false}
+    >
       <motion.div
         css={styles.accountCardContainer(Boolean(large))}
         initial={{
           background: tokens.backgroundRoot,
         }}
-        whileHover={{
-          background: tokens.backgroundDefault,
-        }}
+        whileHover={
+          account.socials
+            ? undefined
+            : {
+                background: tokens.backgroundDefault,
+              }
+        }
         transition={{
           duration: 0.25,
         }}
@@ -170,6 +182,37 @@ function AccountCard({
             {account.bio}
           </Text>
         )}
+
+        {account.socials ? (
+          <div css={[rcss.flex.row, rcss.rowWithGap(8)]}>
+            <Button
+              href={account.url}
+              iconLeft={<Twitter size={16} color={tokens.foregroundDefault} />}
+              text="X / Twitter"
+              small
+            />
+            {account.socials?.facebook ? (
+              <Button
+                href={account.socials.facebook}
+                iconLeft={
+                  <Twitter size={16} color={tokens.foregroundDefault} />
+                }
+                text="Facebook"
+                small
+              />
+            ) : null}
+            {account.socials?.instagram ? (
+              <Button
+                href={account.socials.instagram}
+                iconLeft={
+                  <Instagram size={16} color={tokens.foregroundDefault} />
+                }
+                text="Instagram"
+                small
+              />
+            ) : null}
+          </div>
+        ) : null}
       </motion.div>
     </a>
   );
@@ -254,7 +297,7 @@ export default function Contacts({
                   <Facebook color={tokens.foregroundDefault} size={16} />
                 }
                 text="Facebook"
-                href="https://facebook.com"
+                href="https://www.facebook.com/DeclarationofMemes"
                 css={rcss.flex.grow(1)}
               />
               <Button
@@ -262,7 +305,7 @@ export default function Contacts({
                   <Instagram color={tokens.foregroundDefault} size={16} />
                 }
                 text="Instagram"
-                href="https://instagram.com"
+                href="https://www.instagram.com/libertycappy/"
                 css={rcss.flex.grow(1)}
               />
               <Button

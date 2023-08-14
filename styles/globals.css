@@ -60,3 +60,7 @@ body {
 a {
   text-decoration: none;
 }
+
+ul, ol {
+  margin-left: 24px;
+}

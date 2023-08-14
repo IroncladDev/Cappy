@@ -23,8 +23,8 @@
    - [x] Purchase some cycles & enable auto-refill
    - [x] Provide credentials
    - [x] Import fromn Github as a multiplayer Repl with me in it, deploy on Replit
-6. [ ] Pre-launch checks
-   - Test on mobile
+6. [ ] Pre-launch
+   - [ ] Deactivate always-on Repl
 8. [ ] Launch
    - Tweets from both ends
 

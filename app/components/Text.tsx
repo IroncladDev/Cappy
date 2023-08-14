@@ -5,9 +5,10 @@ import sanitizeHtml from "sanitize-html";
 
 const sanitize = (md: string) =>
   sanitizeHtml(md, {
-    allowedTags: ["b", "i", "em", "strong", "a"],
+    allowedTags: ["b", "i", "em", "strong", "a", "ul", "li", "ol"],
     allowedAttributes: {
       a: ["href"],
+      strong: ["id"],
     },
   });
 
