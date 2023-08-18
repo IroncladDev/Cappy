@@ -84,10 +84,10 @@ export const homepage = {
         bio: "Unapologetically Christian and Based. Liberty Maximalist. Pro: God, Family, Homesteading, Scripture, Memes, Homeschooling, Self-Sufficiency, Hunting, Community.",
         image: "/images/accounts/gigabasedtrad-64.webp",
         url: "https://twitter.com/GigaBasedTrad",
-        // socials: {
-        //   facebook: "https://facebook.com",
-        //   instagram: "https://instagram.com",
-        // },
+        socials: {
+          facebook: "https://www.facebook.com/GigaBasedTrad",
+          instagram: "https://www.instagram.com/gigabasedtrad",
+        },
       },
       {
         username: "SpillTheMemes",
@@ -95,6 +95,10 @@ export const homepage = {
         bio: "This is a place to enjoy humor without all the constant politics. Come here and disconnect and have a good laugh!",
         image: "/images/accounts/spillthememes-64.webp",
         url: "https://twitter.com/SpillTheMemes",
+        socials: {
+          facebook: "https://www.facebook.com/SpillTheMemes",
+          instagram: "https://www.instagram.com/spillthememesog"
+        }
       },
       {
         username: "LPTubularCaucus",
@@ -102,6 +106,9 @@ export const homepage = {
         bio: "Radical? No. Gnarly? No. We're Tubular. 😎 - Follow me for hilarious political satire. 💪",
         image: "/images/accounts/lptubularcaucus-64.webp",
         url: "https://twitter.com/LPTubularCaucus",
+        socials: {
+          facebook: "https://www.facebook.com/LibertarianPartyTubularCaucus"
+        }
       },
       {
         username: "ChristianPunsOG",
@@ -109,6 +116,10 @@ export const homepage = {
         bio: "Christian. Puns. Memes. Satire. Family. Church. Nerd. Life. Liberty. Community. Homeschooling. Homesteading. Freedom. Joy. Scripture.",
         image: "/images/accounts/christianpuns-64.webp",
         url: "https://twitter.com/ChristianPunsOG",
+        socials: {
+          facebook: "https://www.facebook.com/ChristianMemesandPuns",
+          instagram: "https://www.instagram.com/christianpuns"
+        }
       },
       {
         username: "CappyLibertad",
