@@ -115,106 +115,137 @@ function AccountCard({
   };
   large?: boolean;
 }) {
+  if (large || !account?.socials) {
+    return (
+      <a target="_blank" href={account.url} draggable={false}>
+        <motion.div
+          css={styles.accountCardContainer(Boolean(large))}
+          initial={{
+            background: tokens.backgroundRoot,
+          }}
+          whileHover={{
+            background: tokens.backgroundDefault,
+          }}
+          transition={{
+            duration: 0.25,
+          }}
+        >
+          {large ? (
+            <>
+              <img
+                width="128"
+                height="128"
+                src={account.image}
+                css={styles.accountCardImage}
+                alt={account.username}
+              />
+
+              <div css={styles.accountCardContentWrapper}>
+                <Text
+                  variant={large ? "subheadBig" : "subheadDefault"}
+                  multiline
+                >
+                  {account.displayName}
+                </Text>
+                <Text color="dimmest">@{account.username}</Text>
+
+                <Text multiline color="dimmer">
+                  {account.bio}
+                </Text>
+              </div>
+            </>
+          ) : (
+            <div css={styles.smallCardContainer}>
+              <img
+                width="64"
+                height="64"
+                src={account.image}
+                css={styles.accountCardImage}
+                alt={account.username}
+              />
+
+              <div css={styles.accountCardContentWrapper}>
+                <Text
+                  variant={large ? "subheadBig" : "subheadDefault"}
+                  multiline
+                >
+                  {account.displayName}
+                </Text>
+                <Text color="dimmest">@{account.username}</Text>
+              </div>
+            </div>
+          )}
+
+          {large ? null : (
+            <Text multiline color="dimmer">
+              {account.bio}
+            </Text>
+          )}
+        </motion.div>
+      </a>
+    );
+  }
+
   return (
-    <a
-      target="_blank"
-      href={account?.socials ? undefined : account.url}
-      draggable={false}
+    <motion.div
+      css={styles.accountCardContainer(Boolean(large))}
+      initial={{
+        background: tokens.backgroundRoot,
+      }}
+      transition={{
+        duration: 0.25,
+      }}
     >
-      <motion.div
-        css={styles.accountCardContainer(Boolean(large))}
-        initial={{
-          background: tokens.backgroundRoot,
-        }}
-        whileHover={
-          account.socials
-            ? undefined
-            : {
-                background: tokens.backgroundDefault,
-              }
-        }
-        transition={{
-          duration: 0.25,
-        }}
-      >
-        {large ? (
-          <>
-            <img
-              width="128"
-              height="128"
-              src={account.image}
-              css={styles.accountCardImage}
-              alt={account.username}
-            />
+      <div css={styles.smallCardContainer}>
+        <img
+          width="64"
+          height="64"
+          src={account.image}
+          css={styles.accountCardImage}
+          alt={account.username}
+        />
 
-            <div css={styles.accountCardContentWrapper}>
-              <Text variant={large ? "subheadBig" : "subheadDefault"} multiline>
-                {account.displayName}
-              </Text>
-              <Text color="dimmest">@{account.username}</Text>
-
-              <Text multiline color="dimmer">
-                {account.bio}
-              </Text>
-            </div>
-          </>
-        ) : (
-          <div css={styles.smallCardContainer}>
-            <img
-              width="64"
-              height="64"
-              src={account.image}
-              css={styles.accountCardImage}
-              alt={account.username}
-            />
-
-            <div css={styles.accountCardContentWrapper}>
-              <Text variant={large ? "subheadBig" : "subheadDefault"} multiline>
-                {account.displayName}
-              </Text>
-              <Text color="dimmest">@{account.username}</Text>
-            </div>
-          </div>
-        )}
-
-        {large ? null : (
-          <Text multiline color="dimmer">
-            {account.bio}
+        <div css={styles.accountCardContentWrapper}>
+          <Text variant={large ? "subheadBig" : "subheadDefault"} multiline>
+            {account.displayName}
           </Text>
-        )}
+          <Text color="dimmest">@{account.username}</Text>
+        </div>
+      </div>
 
-        {account.socials ? (
-          <div css={[rcss.flex.row, rcss.rowWithGap(8)]}>
+      <Text multiline color="dimmer">
+        {account.bio}
+      </Text>
+
+      {account.socials ? (
+        <div css={[rcss.flex.row, rcss.rowWithGap(8)]}>
+          <Button
+            href={account.url}
+            iconLeft={<Twitter size={16} color={tokens.foregroundDefault} />}
+            text="X / Twitter"
+            small
+          />
+          {account.socials?.facebook ? (
             <Button
-              href={account.url}
+              href={account.socials.facebook}
               iconLeft={<Twitter size={16} color={tokens.foregroundDefault} />}
-              text="X / Twitter"
+              text="Facebook"
               small
             />
-            {account.socials?.facebook ? (
-              <Button
-                href={account.socials.facebook}
-                iconLeft={
-                  <Twitter size={16} color={tokens.foregroundDefault} />
-                }
-                text="Facebook"
-                small
-              />
-            ) : null}
-            {account.socials?.instagram ? (
-              <Button
-                href={account.socials.instagram}
-                iconLeft={
-                  <Instagram size={16} color={tokens.foregroundDefault} />
-                }
-                text="Instagram"
-                small
-              />
-            ) : null}
-          </div>
-        ) : null}
-      </motion.div>
-    </a>
+          ) : null}
+          {account.socials?.instagram ? (
+            <Button
+              href={account.socials.instagram}
+              iconLeft={
+                <Instagram size={16} color={tokens.foregroundDefault} />
+              }
+              text="Instagram"
+              small
+            />
+          ) : null}
+        </div>
+      ) : null}
+    </motion.div>
   );
 }
 
@@ -319,9 +350,11 @@ export default function Contacts({
         </div>
 
         <div css={styles.accountsContainer(isMobile)}>
-          <div css={{ marginBottom: 24 }}>
-            {isMobile ? <DragIndicator /> : null}
-          </div>
+          {isMobile ? (
+            <div css={{ marginBottom: 24 }}>
+              <DragIndicator />
+            </div>
+          ) : null}
           {isMobile ? (
             <MobileCarousel />
           ) : (

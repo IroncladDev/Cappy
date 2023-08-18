@@ -97,8 +97,8 @@ export const homepage = {
         url: "https://twitter.com/SpillTheMemes",
         socials: {
           facebook: "https://www.facebook.com/SpillTheMemes",
-          instagram: "https://www.instagram.com/spillthememesog"
-        }
+          instagram: "https://www.instagram.com/spillthememesog",
+        },
       },
       {
         username: "LPTubularCaucus",
@@ -107,8 +107,8 @@ export const homepage = {
         image: "/images/accounts/lptubularcaucus-64.webp",
         url: "https://twitter.com/LPTubularCaucus",
         socials: {
-          facebook: "https://www.facebook.com/LibertarianPartyTubularCaucus"
-        }
+          facebook: "https://www.facebook.com/LibertarianPartyTubularCaucus",
+        },
       },
       {
         username: "ChristianPunsOG",
@@ -118,8 +118,8 @@ export const homepage = {
         url: "https://twitter.com/ChristianPunsOG",
         socials: {
           facebook: "https://www.facebook.com/ChristianMemesandPuns",
-          instagram: "https://www.instagram.com/christianpuns"
-        }
+          instagram: "https://www.instagram.com/christianpuns",
+        },
       },
       {
         username: "CappyLibertad",
