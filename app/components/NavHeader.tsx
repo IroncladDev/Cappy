@@ -65,7 +65,7 @@ export default function NavHeader() {
             <div css={styles.headerContent(isMobile)}>
               {isMobile ? null : (
                 <a
-                  href="#"
+                  href="/#"
                   css={[rcss.flex.row, rcss.rowWithGap(8), rcss.align.center]}
                 >
                   <img src="/logo/64-round.webp" width={36} height={36} />

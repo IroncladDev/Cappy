@@ -347,23 +347,12 @@ const MobileItem = ({ item }: { item: Item }) => {
   );
 };
 
-const CountryLink = ({
-  title,
-  flag,
-  href,
-}: {
-  title: string;
-  flag: string;
-  href: string;
-}) => {
+const CountryLink = ({ title, flag }: { title: string; flag: string }) => {
   return (
-    <Button
-      href={href}
-      target="_blank"
-      css={styles.countryLink}
-      text={title}
-      iconRight={<Text variant="headerBig">{flag}</Text>}
-    />
+    <div css={[rcss.p(8), rcss.flex.column, rcss.colWithGap(8)]}>
+      <Text variant="headerDefault">{flag}</Text>
+      <Text color="dimmer">{title}</Text>
+    </div>
   );
 };
 
@@ -603,7 +592,11 @@ export default function ShopPreview({
                   css={styles.internationalStoresContainerDesktop}
                   style={{ width }}
                 >
-                  <Text variant="subheadDefault">International Stores</Text>
+                  <Text variant="subheadDefault">International</Text>
+                  <Text multiline>
+                    If you are in one of these countries, search for our brand
+                    "Liberty Swag".
+                  </Text>
                   <div css={[rcss.flex.row, rcss.rowWithGap(16)]}>
                     {homepage.shop.international.map((item, i) => (
                       <CountryLink key={i} {...item} />

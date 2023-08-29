@@ -34,32 +34,26 @@ export const homepage = {
     international: [
       {
         title: "Español",
-        href: "https://x.com",
         flag: "🇪🇸",
       },
       {
         title: "English",
-        href: "https://x.com",
         flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
       },
       {
         title: "Français",
         flag: "🇫🇷",
-        href: "https://x.com",
       },
       {
         title: "Italiano",
         flag: "🇮🇹",
-        href: "https://x.com",
       },
       {
         title: "Deutsch",
-        href: "https://x.com",
         flag: "🇩🇪",
       },
       {
         title: "日本語",
-        href: "https://x.com",
         flag: "🇯🇵",
       },
     ],

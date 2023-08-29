@@ -234,7 +234,7 @@ export default function Nav() {
         initial={false}
       >
         <a
-          href="#"
+          href="/#"
           css={[
             rcss.flex.row,
             rcss.rowWithGap(8),
