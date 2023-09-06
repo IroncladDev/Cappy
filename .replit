@@ -17,8 +17,9 @@ pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
   start = [ "typescript-language-server", "--stdio" ]
 
 [deployment]
-build = ["sh", "-c", "yarn build"]
-run = ["sh", "-c", "yarn start"]
+build = ["sh", "-c", "yarn build && yarn export"]
+deploymentTarget = "static"
+publicDir = "out"
 
 [gitHubImport]
 requiredFiles = [".replit", "replit.nix", ".config"]
