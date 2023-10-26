@@ -5,6 +5,9 @@ export default function HeadMetadata() {
   return (
     <Head>
       <title>Liberty Cappy</title>
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge"/> 
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      
       <meta property="og:title" content="Liberty Cappy" />
       <meta property="twitter:title" content="Liberty Cappy" />
       <meta name="description" content={metaDescription} />

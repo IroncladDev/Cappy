@@ -151,9 +151,22 @@ export default function Intro({
               iconLeft={<Mail color={tokens.foregroundDefault} />}
               href="/newsletter"
               style={{
+                background: tokens.accentDimmest,
+                color: tokens.foregroundDefault,
                 scale: preScale,
               }}
+              whileHover={{
+                background: tokens.accentDimmer,
+                color: tokens.foregroundDefault,
+                borderColor: tokens.accentDefault,
+              }}
+              whileTap={{
+                background: tokens.accentDimmer,
+                color: tokens.foregroundDefault,
+                borderColor: tokens.accentDefault
+              }}
             />
+            
             <Button
               text="Follow me on X / Twitter"
               iconLeft={<Twitter color={tokens.foregroundDefault} />}
