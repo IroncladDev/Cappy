@@ -1,10 +1,8 @@
-import {
-  motion,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { rcss, tokens } from "app/tokens";
 import Text from "./Text";
 import useAppState from "app/hooks/useAppState";
-import Link from 'next/link';
+import Link from "next/link";
 import { Grid, Home, Info, ShoppingCart, Mail } from "react-feather";
 import Button from "./ui/Button";
 
@@ -92,7 +90,7 @@ const styles = {
 export function NavItem({
   text,
   href,
-  onClick = () => { },
+  onClick = () => {},
   icon,
   small,
 }: {
@@ -145,36 +143,32 @@ export default function NavHeader() {
         {isMobile ? null : <div css={rcss.flex.grow(1)} />}
 
         {links.map(({ text, href, icon }, i) => (
-          <NavItem
-            key={i}
-            text={text}
-            href={href}
-            icon={icon || null}
-            small
-          />
+          <NavItem key={i} text={text} href={href} icon={icon || null} small />
         ))}
 
-        {isMobile ? null : <Button
-          text="Newsletter"
-          level={2}
-          iconLeft={<Mail color={tokens.foregroundDefault} size={16} />}
-          href="/newsletter"
-          style={{
-            background: tokens.accentDimmer,
-            color: tokens.foregroundDefault
-          }}
-          whileHover={{
-            background: tokens.accentDimmest,
-            color: tokens.foregroundDefault,
-            borderColor: tokens.accentDefault
-          }}
-          whileTap={{
-            background: tokens.accentDimmest,
-            color: tokens.foregroundDefault,
-            borderColor: tokens.accentDefault
-          }}
-          small
-        />}
+        {isMobile ? null : (
+          <Button
+            text="Newsletter"
+            level={2}
+            iconLeft={<Mail color={tokens.foregroundDefault} size={16} />}
+            href="/newsletter"
+            style={{
+              background: tokens.accentDimmer,
+              color: tokens.foregroundDefault,
+            }}
+            whileHover={{
+              background: tokens.accentDimmest,
+              color: tokens.foregroundDefault,
+              borderColor: tokens.accentDefault,
+            }}
+            whileTap={{
+              background: tokens.accentDimmest,
+              color: tokens.foregroundDefault,
+              borderColor: tokens.accentDefault,
+            }}
+            small
+          />
+        )}
       </div>
     </motion.div>
   );

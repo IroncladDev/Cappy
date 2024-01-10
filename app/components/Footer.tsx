@@ -1,7 +1,7 @@
 import { footer } from "app/config";
 import { rcss, tokens } from "app/tokens";
 import Link from "next/link";
-import { Mail, Twitter } from "react-feather";
+import { Mail, Twitter, Youtube } from "react-feather";
 import Button from "./ui/Button";
 import Text from "./Text";
 import useAppState from "app/hooks/useAppState";
@@ -33,8 +33,9 @@ const styles = {
   ],
   ctaButtonWrapper: [
     rcss.flex.row,
-    rcss.rowWithGap(8),
+    rcss.flex.wrap,
     {
+      gap: 8,
       "& > a": {
         flexGrow: 1,
         display: "flex",
@@ -103,6 +104,15 @@ export default function Footer() {
                 }
                 iconRight={<Text>𝕏</Text>}
                 href="https://twitter.com/LibertyCappy"
+                css={rcss.flex.grow(1)}
+              />
+              <Button
+                text="Youtube"
+                level={2}
+                iconLeft={
+                  <Youtube color={tokens.foregroundDefault} size={16} />
+                }
+                href="https://www.youtube.com/@libertycappy"
                 css={rcss.flex.grow(1)}
               />
             </div>

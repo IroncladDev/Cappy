@@ -73,11 +73,11 @@ export const homepage = {
     },
     secondary: [
       {
-        username: "GigaBasedTrad",
-        displayName: "Giga Based Trad",
+        username: "GigaBasedDad",
+        displayName: "Giga Based Dad",
         bio: "Unapologetically Christian and Based. Liberty Maximalist. Pro: God, Family, Homesteading, Scripture, Memes, Homeschooling, Self-Sufficiency, Hunting, Community.",
-        image: "/images/accounts/gigabasedtrad-64.webp",
-        url: "https://twitter.com/GigaBasedTrad",
+        image: "/images/accounts/gigabaseddad-64.webp",
+        url: "https://twitter.com/GigaBasedDad",
         socials: {
           facebook: "https://www.facebook.com/GigaBasedTrad",
           instagram: "https://www.instagram.com/gigabasedtrad",
@@ -95,11 +95,11 @@ export const homepage = {
         },
       },
       {
-        username: "LPTubularCaucus",
-        displayName: "Libertarian Party Tubular Caucus",
-        bio: "Radical? No. Gnarly? No. We're Tubular. 😎 - Follow me for hilarious political satire. 💪",
-        image: "/images/accounts/lptubularcaucus-64.webp",
-        url: "https://twitter.com/LPTubularCaucus",
+        username: "TubularGoobular",
+        displayName: "Tubular Goobular",
+        bio: "Radical? No. Gnarly? No. We're Tubular. 😎✨🚀🍄 High Powered Goober Memes 🚡",
+        image: "/images/accounts/tubulargoobular-64.webp",
+        url: "https://twitter.com/TubularGoobular",
         socials: {
           facebook: "https://www.facebook.com/LibertarianPartyTubularCaucus",
         },
@@ -138,7 +138,7 @@ export const footer = {
     ["Privacy Policy", "/privacy"],
   ],
   socialLinks: [
-    ["@GigaBasedTrad", "https://twitter.com/GigaBasedTrad"],
+    ["@GigaBasedTrad", "https://twitter.com/GigaBasedDad"],
     ["@SpillTheMemes", "https://twitter.com/SpillTheMemes"],
     ["@LPTubularCaucus", "https://twitter.com/LPTubularCaucus"],
     ["@ChristianPunsOG", "https://twitter.com/ChristianPunsOG"],

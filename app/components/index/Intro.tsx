@@ -12,7 +12,7 @@ import Text from "../Text";
 import Button from "../ui/Button";
 import { motion } from "framer-motion";
 import { pOffset } from "app/lib/algs";
-import { Mail, Twitter } from "react-feather";
+import { Mail, Twitter, Youtube } from "react-feather";
 
 function TransitionParagraph({
   text,
@@ -145,7 +145,17 @@ export default function Intro({
             alt="Logo"
           />
 
-          <div css={[rcss.flex.column, rcss.colWithGap(8), rcss.center]}>
+          <div
+            css={[
+              rcss.flex.row,
+              rcss.flex.wrap,
+              rcss.center,
+              rcss.maxWidth(280),
+              {
+                gap: 8,
+              },
+            ]}
+          >
             <Button
               text="Subscribe to my Newsletter"
               iconLeft={<Mail color={tokens.foregroundDefault} />}
@@ -163,14 +173,23 @@ export default function Intro({
               whileTap={{
                 background: tokens.accentDimmer,
                 color: tokens.foregroundDefault,
-                borderColor: tokens.accentDefault
+                borderColor: tokens.accentDefault,
               }}
             />
-            
+
             <Button
-              text="Follow me on X / Twitter"
+              text="X / Twitter"
               iconLeft={<Twitter color={tokens.foregroundDefault} />}
               href="https://twitter.com/LibertyCappy"
+              style={{
+                scale: preScale,
+              }}
+            />
+
+            <Button
+              text="Youtube"
+              iconLeft={<Youtube color={tokens.foregroundDefault} />}
+              href="https://www.youtube.com/@libertycappy"
               style={{
                 scale: preScale,
               }}
